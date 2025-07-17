@@ -7,6 +7,10 @@
 
    See the LICENSE file for details.
 
+.. role:: key
+    :class: key
+
+
 .. _manage:
 
 Managing the beamline
@@ -219,16 +223,21 @@ goniometer:
 
 .. code-block:: python
 
-   RE(change_edge('Ni', xrd=True, energy=8600))
+   RE(xrd_mode())
+
+That command is a thin wrapper around this call to the change_edge command
+
+.. code-block:: python
+
+   RE(change_edge('Ni', xrd=True, energy=8600, slits=True, mirror=False))
 
 The element symbol in the first argument is not actually used in any
 way when ``xrd=True`` is used, however the funtion requires
 `something` as its first argument.  Setting ``xrd=True`` forces the
 ``focus=True`` and ``target=0`` arguments to the ``change_edge()``
 command to be set.  This will move to the specified energy, place the
-photon delivery mode in `XRD` mode, optimize the second
-crystal and the slit height, and move to an approximately M2 bender
-position. 
+photon delivery mode in `XRD` mode, optimize the second crystal and
+the slit height, and move to an appropriate M2 bender position.
 
 To do all of that by hand, you would do the follow commands:
 
@@ -244,9 +253,24 @@ of the goniometer.  8600 eV is the nominal operating energy for the
 goniometer.  If a higher energy is required, substitute the correct
 energy for ``8600`` in the second line.
 
-.. note:: The I\ :sub:`0` chamber should be left in place.  This will
-          facilitate changing energy while doing scattering
-          experiments. The flight path can be put in place at any time.
+It is prudent to adjust the yaw of the focusing mirror to optimize
+the shape and inclination of the focused beam at the goniometer.  This
+is done by placing the direct beam camera in the beam path just down
+stream of the sample position at the center of the goniometer.  Then
+do
+
+.. code-block:: python
+
+   RE(mvr(m2.yaw, 0.05))
+
+or
+
+.. code-block:: python
+
+   RE(mvr(m2.yaw, -0.05))
+
+while observing the beam on the camera.
+
 
 .. todo:: Determine look-up table for lower energy operations using
 	  both M2 and M3.  This will require a new XAFS table and
@@ -440,16 +464,61 @@ From the docstring of the class:
       reactivating amplifiers
       enabling motors
 
+Unresponsive motor controller
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If all the motors on a single motor FMB MCS8 controller are
+non-responsive, it is possible that the kill switch for that
+controller has been triggered inadvertently.  This happened, for
+example, one time that a ``change_edge()`` command was interrupted by
+:key:`Control`-:key:`c` :key:`Control`-:key:`c`.
+
+In that case, check the front panel of the motor controller,
+:numref:`Figure %s <fig-disabled_light>`.  If the light labeled
+"Disabled" is illuminated, then it is likely that kill switch for that
+controller is open.
+
+.. _fig-disabled_light:
+.. figure:: _images/infrastructure/disabled_light.jpg
+   :target: _images/disabled_light.jpg
+   :width: 50%
+   :align: center
+
+   Front panel of an FMBO MCS8 controller.
+
+In that case, try enabling that kill switch.  At the bsui command
+line, do
+
+.. code-block:: python
+
+   ks.enable('m2')
+
+That example re-enables the kill switch for the focusing mirror
+controller.  The other possible arguments for the enable command are 
+
++ ``dcm``: motor controller 2, monochromator
++ ``slits2``:  motor controller 3, post-mono slits
++ ``m2``: motor controller 4, focusing mirror
++ ``m3``: motor controller 5, harmonic rejection mirror
++ ``dm3``: motor controller 6, diagnostic module 3 and hutch slits
+
+After running the ``ks.enable()`` command, check the "Disabled" light
+on the front of the controller.  If it is off, the motors should be
+responsive again.
+
+
 
 Old kill switch system
 ~~~~~~~~~~~~~~~~~~~~~~
 
+.. note:: The panel and cabling for the old kill switch system is
+	  still in place, but the controller-side ends of the cables
+	  are at the bottom of the rack.  Should the DIODE system
+	  somehow fail, this can be redeployed easily.
+
 There is a row of switches on rack D, the rack next to the control
 station, that are used to disable the amplifiers for the MCS8 motor
-controllers.  The cabling for this system still exists, but is not
-plugged into the controllers.  Should the DIODE system somehow fail,
-this can be redeployed easily.
-
+controllers.  See :numref:`Figure %s <fig-killswitches>`.
 
 .. _fig-killswitches:
 .. figure:: _images/infrastructure/Kill_switches.jpg
@@ -486,12 +555,14 @@ After power cycling the MCS8, it is necessary to re-home all the
 motors controlled by the MCS8.
 
 
+
 MCS8 Connector
 ~~~~~~~~~~~~~~
 
 The disable plug on the back of the MCS8 controllers is a Binder RS
-connector, part number 468-885. `Here's an
+connector, part number 468-885. `Here's a vendor example
 example. <https://uk.rs-online.com/web/p/industrial-automation-circular-connectors/0468885/?sra=pstk>`__
+(Accessed July 2025)
 
 And here is the wiring diagram.  Short the prongs on the side opposite
 to the alignment groove.
@@ -717,7 +788,18 @@ calibration.
 
 #. Edit :file:`BMM/dcm-parameters.py` as indicated.
 
-#. Do
+#. Do 
+
+   .. code-block:: python
+
+      calibrate_pitch(mono='111')
+
+   This performs a simple linear fit to the rocking curve peak
+   positions for ``dcm_pitch`` found at each edge.  Use the fitted
+   slope and offset to modify ``approximate_pitch`` in
+   :file:`BMM/functions.py`.
+
+#. Finally do
 
    .. code-block:: python
 
@@ -729,18 +811,8 @@ calibration.
 
       dcm.set_crystal()
 
-   Or simply restart |bsui|, which is usually the easier thing.
+   Or simply restart |bsui|, which is usually the simpler solution.
 
-#. Finally, do 
-
-   .. code-block:: python
-
-      calibrate_pitch(mono='111')
-
-   This performs a simple linear fit to the rocking curve peak
-   positions for ``dcm_pitch`` found at each edge.  Use the fitted
-   slope and offset to modify ``approximate_pitch`` in
-   :file:`BMM/functions.py`.
 
 The mono should now be correctly calibrated using the new calibration
 parameters.
