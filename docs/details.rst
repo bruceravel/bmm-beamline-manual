@@ -1082,6 +1082,8 @@ Starting the system
 
 + Start the NFS server on ``xf06bm-pilatus100k-651``.  This can be
   done with the YAST GUI or by ``/etc/init.d/nfsserver restart``
++ Start the NTP server on ``xf06bm-pilatus100k-651``.  This can be
+  done with the YAST GUI or by ``/etc/init.d/ntp restart``
 + Make sure that ``/disk2`` on ``xf06bm-pilatus100k-651`` is mounted
   by ``xf06bm-ioc1`` at ``/disk2`` on that machine.  That mount should
   happen at boot and be available as long as the Pilatus server is on
@@ -1103,6 +1105,22 @@ Overview of file saving
   normally use ``pilatus``, which writes images to HDF5 files.  The
   ``pilatus_tiff`` object is helpful for testing tiff file writing,
   which is used by IBM.
+
+.. note:: A commonly observed problem with the Pilatus is related to
+	  the use of NFS to move images between the camserver and the
+	  IOC.  The NFS connection requires that the time stamp on the
+	  image file not be more than 10 seconds out of date.  Without
+	  a running NTP server on ``xf06bm-pilatus100k-651``, the
+	  clock on that machine will eventually fall more than 10
+	  seconds behind the clock on ``xf06bm-ioc1``.  This will
+	  manifest as befuddling problems when trying to interact with
+	  the detector.  Count times in bsui will be very long, the
+	  image will not update on the CSS screen, the PVA and HDF5
+	  plugins will report 0x0 image sizes, etc.  The solution is
+	  to ssh to ``xf06bm-pilatus100k-651``, restart the NTP server
+	  using the command above, and verify the clock time against
+	  another computer.  After that, restart the IOC, then restart
+	  bsui.
 
 Configuring the tiff and pilatus AD plugins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
