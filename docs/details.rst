@@ -1080,24 +1080,28 @@ is the only IOC running on ``xf06bm-ioc1``.
 Starting the system
 ~~~~~~~~~~~~~~~~~~~
 
+After logging in as the ``det`` user:
+
 + Start the NFS server on ``xf06bm-pilatus100k-651``.  This can be
-  done with the YAST GUI or by ``/etc/init.d/nfsserver restart``
+  done with the YAST GUI or by ``sudo /etc/init.d/nfsserver restart``
 + Start the NTP server on ``xf06bm-pilatus100k-651``.  This can be
-  done with the YAST GUI or by ``/etc/init.d/ntp restart``
+  done with the YAST GUI or by ``sudo /etc/init.d/ntp restart``
 + Make sure that ``/disk2`` on ``xf06bm-pilatus100k-651`` is mounted
   by ``xf06bm-ioc1`` at ``/disk2`` on that machine.  That mount should
   happen at boot and be available as long as the Pilatus server is on
   the network.
 + Turn on the detector by clicking the switch on the back.
-+ Start camserver on ``xf06bm-pilatus100k-651``.  This is done in a
-  terminal by ``start-camserver``.
-+ Start (or restart) the IOC on ``xf06bm-ioc1`` by doing ``dzdo
-  manage-iocs restart Pilatus100K``
++ Start the camserver on ``xf06bm-pilatus100k-651``.  This is done in
+  a terminal by ``start-camserver`` in the ``det`` home directory.
++ Start (or restart) the IOC on ``xf06bm-ioc1`` by clicking the
+  :key:`Reboot` button on the Pilatus screen or by doing ``dzdo
+   manage-iocs restart Pilatus100K`` at the command line.
 
 Overview of file saving
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-+ The camserver writes tiff files to ``/disk2`` on ``xf06bm-pilatus100k-651``.
++ The camserver writes tiff files to ``/disk2`` on
+  ``xf06bm-pilatus100k-651``.
 + That folder is NFS mounted on ``xf06bm-ioc1`` as ``/disk2``.
 + The tiff and hdf5 AD plugins read individual images from that
   location and write tiff or hdf5 files to proposal directories.
@@ -1106,23 +1110,30 @@ Overview of file saving
   ``pilatus_tiff`` object is helpful for testing tiff file writing,
   which is used by IBM.
 
-.. note:: A commonly observed problem with the Pilatus is related to
-	  the use of NFS to move images between the camserver and the
-	  IOC.  The NFS connection requires that the time stamp on the
-	  image file not be more than 10 seconds out of date.  Without
-	  a running NTP server on ``xf06bm-pilatus100k-651``, the
-	  clock on that machine will eventually fall more than 10
-	  seconds behind the clock on ``xf06bm-ioc1``.  This will
-	  manifest as befuddling problems when trying to interact with
-	  the detector.  Count times in bsui will be very long, the
-	  image will not update on the CSS screen, the PVA and HDF5
-	  plugins will report 0x0 image sizes, etc.  The solution is
-	  to ssh to ``xf06bm-pilatus100k-651``, restart the NTP server
-	  using the command above, and verify the clock time against
-	  another computer.  After that, restart the IOC, then restart
-	  bsui.
+.. warning:: A commonly observed problem with the Pilatus is related
+	     to the use of NFS to move images between the camserver
+	     and the IOC server.  The NFS connection requires that the
+	     time stamp on the image file not be more than 10 seconds
+	     out of date.  Without a running NTP server on
+	     ``xf06bm-pilatus100k-651``, the clock on that machine
+	     will eventually fall more than 10 seconds behind the
+	     clock on ``xf06bm-ioc1``.  This will manifest as
+	     befuddling problems when trying to interact with the
+	     detector |md| count times in bsui will be very long, the
+	     image will not update on the CSS screen, the PVA and HDF5
+	     plugins will report 0x0 image sizes, etc.  The solution
+	     is to ssh to ``xf06bm-pilatus100k-651``, restart the NTP
+	     server using the command above, and verify the clock time
+	     against another computer.  After that, restart the IOC,
+	     then restart bsui.
 
-Configuring the tiff and pilatus AD plugins
+.. note:: There is a cron job running on ``xf06bm-ioc1`` which deletes
+	  any tiff files in ``/disk2`` that are over an hour old.
+	  The benefit is that this keeps ``/disk2`` from filling up.
+	  The risk is that the HDF5 plugin for the Pilatus IOC must be
+	  working correctly for data to be preserved properly.
+
+Configuring the pilatus and tiff AD plugins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -1149,8 +1160,10 @@ format is identical to the format used on the tiff plugin screen.
    Pilatus plugin configuration screen
 
 
-On the tiff plugin configuration screen, several of the parameters
-must be set for any measurement.
+On the tiff plugin configuration screen |nd| which is needed for the
+``pilatus_tiff`` object but not for the ``pilatus`` object using the
+HDF5 plugin |nd| several of the parameters must be set for any
+measurement.
 
 The file path must be a location in the user's proposal folder on
 shared storage.  Thus, the path must be something like 

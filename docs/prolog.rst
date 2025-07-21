@@ -33,6 +33,7 @@
 .. |pm|      unicode:: U+00B1  .. PLUS-MINUS SIGN
    :trim:
 .. |nd|      unicode:: U+2013  .. EN DASH
+.. |md|      unicode:: U+2014  .. EM DASH
 .. |times|   unicode:: U+00D7  .. MULTIPLICATION SIGN
 .. |neq|     unicode:: U+2260  .. NOT EQUAL TO
 .. |deg|     unicode:: U+00B0  .. DEGREE SYMBOL
