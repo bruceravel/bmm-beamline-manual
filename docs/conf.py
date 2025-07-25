@@ -65,7 +65,8 @@ rst_epilog = open(os.path.join(CURDIR, 'epilog.rst'),'r').read()
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'prolog.rst', 'epilog.rst', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'prolog.rst', 'epilog.rst', 'Thumbs.db',
+                    '.DS_Store', 'my-venv']
 
 
 # -- Options for HTML output -------------------------------------------------

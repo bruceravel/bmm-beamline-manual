@@ -150,13 +150,18 @@ Hydrofluoric acid treatment
   (khalid@bnl.gov), as soon as possible. 
 
 Environmental and earth science sample preparation and treatment
-  Request Lab 3L-L07.
+  Request Lab 3L-L07. 
+
+  .. caution:: If your lab work can be performed in Lab 3L-L09, the
+	       XAS Chemistry Lab, please select that lab
+	       instead. Only select 3L-L07 if you need a specific
+	       feature of the Environmental Science Wet Lab.
   
 Electrochemistry and battery science
   Request Lab 4L-L09.
 
 .. admonition:: Radiological samples
-   :class: important
+   :class: caution
 
    Radionuclide samples must be prepared and properly contained at the
    home institution.  NSLS-II has no lab available for work on
