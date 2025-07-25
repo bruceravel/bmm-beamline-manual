@@ -1095,7 +1095,7 @@ After logging in as the ``det`` user:
   a terminal by ``start-camserver`` in the ``det`` home directory.
 + Start (or restart) the IOC on ``xf06bm-ioc1`` by clicking the
   :key:`Reboot` button on the Pilatus screen or by doing ``dzdo
-   manage-iocs restart Pilatus100K`` at the command line.
+  manage-iocs restart Pilatus100K`` at the command line.
 
 Overview of file saving
 ~~~~~~~~~~~~~~~~~~~~~~~
