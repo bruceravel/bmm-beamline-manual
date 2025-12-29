@@ -56,6 +56,7 @@ BMM is NIST's :red:`B`\ eamline for :red:`M`\ aterials :red:`M`\ easurement.
    kafka.rst
    ionchambers.rst
    details.rst
+   reflectivity.rst
    restore.rst
    photos.rst
    todo.rst

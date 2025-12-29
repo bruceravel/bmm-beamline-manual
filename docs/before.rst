@@ -203,14 +203,29 @@ Returning users can `check training status online <https://www.bnl.gov/training/
    Failure to complete training will result in a delay starting your
    experiment.
 
+Radiological training
+~~~~~~~~~~~~~~~~~~~~~
+
+If your experiment requires Rad Worker I or Rad Worker II for handling
+samples at NSLS-II |nd| for example, experiments involving
+transuranics or technicium |nd| you must have completed that level of
+training well in advance of your beamtime.  If you wait until you
+arrive at BNL to take the Rad Worker challenge exam, it is very
+unlikely that will receive credit before the end of your beamtime.
+
+BNL has reciprocity agreements for Rad Worker certification with some
+Department of Energy labs, notably Los Alamos and Oak Ridge.  You
+should request reciprocity well in advance of your beamtime.  It can
+take a week or longer to process the request.
+
 
 Electrical Equipment
 --------------------
 
-Any equipment with an electrical cable including low-voltage
-instruments and sample holderss are considered electrical equipment
-(laptop computers are excluded) and are subject to an electrical
-equipment inspection (EEI).
+Any equipment with an electrical cable |nd| including low-voltage
+instruments and some sample holders |nd| is considered electrical
+equipment (laptop computers are excluded) and is subject to an
+electrical equipment inspection (EEI).
 
 If you plan to bring electrical equipment for your experiment, go to
 http://bit.ly/m/eei to fill out the EEI request form.
@@ -223,7 +238,7 @@ knowledge of the equipment coming to the beamline.
 	     experiment.  Equipment that cannot pass EEI may not be used
 	     at NSLS-II.
 
-Note that some already-approved electrical equipment (e.g.,
+Note that some already-approved electrical equipment (notably, a
 potentiostat, heaters, cryostats, temperature controllers, sample
 spinners, and more) is available at the beamline.
 
@@ -282,11 +297,11 @@ The Day of your Experiment
 .. admonition:: As of May 2025
    :class: note
 
-   First time visitors to BNL should now check in at the new Science
-   and User Support Center (SUSC), building 101.  Take a
-   right at the roundabout before reaching the main gate.  The visitor
-   and badging offices which used to be in Building 400 are now
-   located at SUSC.
+   First time visitors to BNL (and those needing to renew their
+   badges) should now check in at the new Science and User Support
+   Center (SUSC), building 101.  Take a right at the roundabout before
+   reaching the main gate.  The visitor and badging offices which used
+   to be in Building 400 are now located at SUSC.
 		
 You should consider having all team members arrive the afternoon prior
 to the first day of the beamtime to check in at `the GUV Center
