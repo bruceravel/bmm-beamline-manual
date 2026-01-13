@@ -45,8 +45,9 @@ Collimating Mirror
      is in the correct orientation for collimation and delivery of
      beam through the ratchet wall.  
 
-     :boldred:`Moving any first mirror motor runs the risk of leaving the
-     first mirror in a non-functional state!`
+     :boldred:`Moving any first mirror motor runs the risk of leaving
+     the first mirror – and the entire beamline – in a
+     non-functional state!`
 
 Monochromator
   The collimated beam then hits the double crystal monochromator
@@ -104,8 +105,9 @@ measure.  This will:
   :numref:`(Section %s) <sample_stages>`
 * set the active Xspress3 ROI to the correct emission line
 
-This whole process takes at most 7 minutes, sometimes under 3
-minutes.  After that, the beamline is ready to collect data.
+Depending on which edge you are moving from and to, this whole process
+takes between 3 and 7 minutes.  After that, the beamline is ready to
+collect data.
 
 If using the focusing mirror, do this:
 
@@ -227,7 +229,7 @@ The full set of parameters for the ``change_edge()`` plan are:
 
 .. code-block:: python
 
-   RE(change_edge(element, focus=False, edge='K', energy=None, tune=True, slits=True, calibrating=False, target=300.))
+   RE(change_edge(element, focus=False, edge='K', energy=None, tune=True, slits=False, mirror=True, calibrating=False, target=300.))
 
 where,
 
@@ -253,12 +255,19 @@ where,
   whether to move M2 motors.  Default is ``False``.
 
 ``tune``
-  ``True``: optimize DCM second crystal pitch; ``False``: skip ``rocking_curve()``
-  scan.  Default is ``True``.  Skipping this is rarely a good idea.
+  ``True``: optimize DCM second crystal pitch; ``False``: skip
+  ``rocking_curve()`` scan.  Default is ``True``.  Skipping this is
+  rarely a good idea.
 
 ``slits``
   ``True``: optimize slit height; ``False``: skip ``slit_hight()``
-  scan.  Default is ``True``.  Skipping this is rarely a good idea.
+  scan.  Default is ``False``.  This step is deprecated in favor of
+  adjusting the mirror pitch
+
+``mirror``
+  ``True``: optimize mirror pitch, M3 when using collimated beam, M2
+  when using focused beam; ``False``: skip ``mirror_itch()`` scan.
+  Default is ``True``.  Skipping this is rarely a good idea.
 
 ``no_ref``
   ``True``: skip moving to the correct reference foil.  Default is
@@ -345,8 +354,9 @@ facilitating any actions a user should ever need.
 
    .. code-block:: text
 
-      Energy = 19300.1   reflection = Si(111)
-      current: Bragg =  5.87946   2nd Xtal Perp = 15.0792   2nd Xtal Para = 146.4328
+      Energy = 17335.0   reflection = Si(111)   wavelength = 0.715225
+      current: Bragg =  6.54894   2nd Xtal Perp  = 15.0986   Para = 131.5183
+                                           Pitch =  4.4295   Roll =  -6.0564
 
 
    This report shows the current energy, the crystal set currently in

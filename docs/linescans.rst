@@ -141,30 +141,23 @@ arguments that they have special names.
 
      yield from rocking_curve()
 
-**Slit height scan**
+**Mirror pitch scan**
    This command::
 
-     RE(slit_height())
-
-   Runs a scan of the DM3 BCT motor around its current position.  At
-   the end of the scan, you are prompted to left click
-   :mark:`leftclick,.` on the plot to choose a position to move the
-   slit height to.  This scan is useful for verifying that the slits
-   are in the correct orientation for the delivery of beam from the
-   mirrors.
-
-   Optionally, the scan will move to the peak of the measurement,
-   skipping the prompt and plot interaction::
-
-     RE(slit_height(move=True))
+     RE(mirror_pitch(mirror='m3'))
+     
+   does a scan of the pitch of the harmonic rejection mirror (M3) to
+   center the beam onto the hutch slits.  Setting the ``mirror``
+   argument to ``m2`` does the same with the focusing mirror (M2),
+   which would be appropriate for the focused beam in mode A.  This
+   scan is used to optimize the beam intensity after moving the slits
+   to their tabulated value.
 
    You can put this scan in a macro using::
 
-     yield from slit_height()
+     yield from mirror_pitch(mirror='m3')
 
-
-**Align ex situ sample holder** 
-
+**Align ex situ sample holder**
    If the *ex situ* sample wheel is in approximately the right
    position such that X-rays are passing through a slot on the outer
    ring, you can center the slot around the beam with::
@@ -183,6 +176,7 @@ arguments that they have special names.
    You can put this scan in a macro using::
 
      yield from find_slot()
+
 
 Area scans
 ----------

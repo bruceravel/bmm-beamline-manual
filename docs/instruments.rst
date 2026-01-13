@@ -7,6 +7,10 @@
 
    See the LICENSE file for details.
 
+.. role:: strike
+   :class: strike
+
+
 .. _instruments:
 
 
@@ -242,6 +246,9 @@ running in a virtual container.  Your electrochemical data will be
 saved to the ``assets/vsp300-1/`` folder in your :numref:`proposal
 folder (Section %s) <data>`.
 
+See :numref:`Section %s <windows_vm>` for details about starting the
+Windows VM, and using the BioLogic control software.
+
 .. note::
 
    We do not, at this time, have EPICS-level control of the
@@ -251,7 +258,7 @@ folder (Section %s) <data>`.
    DSSI has implemented external triggering and collection of current
    and voltage using the `Quantum Detectors PandABox
    <https://quantumdetectors.com/products/pandabox/>`__.  This may
-   become available to BMM users sometime in 2025.
+   become available to BMM users sometime in :strike:`2025` 2026.
 
 BMM does not provide electrochemical cells.  The user is expected to
 bring their own cells.  Ideally, the electrochemistry has been tested
@@ -387,8 +394,8 @@ in the form of an Eulerian cradle and a `compact rotary stage
 
 
 Here are mechanical drawings, including bolt hole patterns.  Consult
-these if designing an instrument intended to be mounted for rotation,
-pitch, or roll.
+these if designing an instrument intended to be mounted for rotation
+about the Z axis (Rz, yaw), pitch (Rx), or roll (Ry).
 
 + Tilt stage mechanical drawing: :download:`PDF <_static/5203_10--32263_131839.pdf>`
 

@@ -64,7 +64,13 @@ fault is shown here:
 The previous |bsui| session cannot be recovered at this point.  You will
 have to restart |bsui| and restart your data collection.
 
-In this case, at the command line,  type ``bsui`` and hit ``Enter``.
+In this case, at the command line,  do this to restart |bsui|:
+
+.. code-block:: bash
+
+   cd ~/.ipython/profile_collection
+   pixi run start
+
 
 This will start a new BlueSky session and should restore the state of
 your experiment from before the crash.

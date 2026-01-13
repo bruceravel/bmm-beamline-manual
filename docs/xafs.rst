@@ -576,9 +576,9 @@ BlueSky
 Revisit an XAFS scan
 --------------------
 
-.. admonition:: Needs to be verified
+.. admonition:: This is no longer correct.
 
-   Does this still work post-data-security?
+   Need to document cammand using ``kafka_message()``
 
 Grab a database entry and write it to an XDI file::
 
