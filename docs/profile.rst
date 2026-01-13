@@ -114,11 +114,11 @@ BMM_configuration.ini
 
 This files controls configuration details for measurement
 instrumentation and network services.  The concept is that this file
-is edited prior to starting bsui to reflect the current state of the
+is edited prior to starting |bsui| to reflect the current state of the
 beamline and the needs of the current experiment.
 
 Much of this file consists of flags for turning specific instruments
-on and off when starting bsui.  For example, this section is used to
+on and off when starting |bsui|.  For example, this section is used to
 enable or disable the use of the Pilatus 100K area detector and the
 Dante readout for the NSLS-II germanium detector in XAS experiments.
 
@@ -143,8 +143,8 @@ Additionally, there are sections with flags for controlling
 Additional sections control configuration for
 
 + the network addresses of various services or disk locations
-  containing files and folders needed for proper operation of bsui at
-  BMM
+  containing files and folders needed for proper operation of |bsui|
+  at BMM
 
 + for both the new NSLS-II Slack workspace and the older, deprecated
   BMM Slack workspace

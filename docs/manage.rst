@@ -486,7 +486,7 @@ controller is open.
 
    Front panel of an FMBO MCS8 controller.
 
-In that case, try enabling that kill switch.  At the bsui command
+In that case, try enabling that kill switch.  At the |bsui| command
 line, do
 
 .. code-block:: python
@@ -576,6 +576,7 @@ to the alignment groove.
 Tutorial for how to put together the Binder connectors: :download:`PDF <_static/Binder-instructions.pdf>`
 
 
+.. _windows_vm:
 
 Windows VM and BioLogic
 -----------------------

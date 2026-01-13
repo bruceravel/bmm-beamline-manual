@@ -89,10 +89,17 @@ between ion chambers and electrometers.
 In `BMM_configuration.ini
 <https://github.com/NSLS2/bmm-profile-collection/blob/main/startup/BMM_configuration.ini>`__
 there are boolean parameters for setting the various electrometer
-signal chains.  These, in turn, set internal parameters in the bsui
+signal chains.  These, in turn, set internal parameters in the |bsui|
 profile or enabling the different signal chains.
 
-Editing the INI refile will require restarting ``bsui``.
+Editing the INI file will require restarting |bsui|:
+
+.. code-block:: bash
+
+   cd ~/.ipython/profile_collection
+   pixi run start
+
+
 
 These internal parameters are used to synchronize setting
 integration times across the various signal chains via the

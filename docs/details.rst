@@ -474,7 +474,14 @@ Eiger2 Si 4M
 #. Restart the Eiger ioc on ``xf06bm-det-ioc``.  This can be done by
    clicking the :key:`Reboot` button on the Eiger CSS screen.
 #. Edit the ``BMM_configuration.ini`` file to enable the Eiger Ophyd
-   object.  Restart bsui.
+   object.  Restart |bsui| by doing
+
+   .. code-block:: bash
+
+      cd ~/.ipython/profile_collection
+      pixi run start
+
+
 
    
 
@@ -1119,13 +1126,20 @@ Overview of file saving
 	     will eventually fall more than 10 seconds behind the
 	     clock on ``xf06bm-ioc1``.  This will manifest as
 	     befuddling problems when trying to interact with the
-	     detector |md| count times in bsui will be very long, the
+	     detector |md| count times in |bsui| will be very long, the
 	     image will not update on the CSS screen, the PVA and HDF5
 	     plugins will report 0x0 image sizes, etc.  The solution
 	     is to ssh to ``xf06bm-pilatus100k-651``, restart the NTP
 	     server using the command above, and verify the clock time
 	     against another computer.  After that, restart the IOC,
-	     then restart bsui.
+	     then restart |bsui| by doing
+
+	     .. code-block:: bash
+
+		cd ~/.ipython/profile_collection
+		pixi run start
+
+
 
 .. note:: There is a cron job running on ``xf06bm-ioc1`` which deletes
 	  any tiff files in ``/disk2`` that are over an hour old.
@@ -1203,7 +1217,7 @@ Setting ROIs
 
 To set and use ROIs, the ROI and Stats plugins must be enabled in the
 IOC.  This can be done on the appropriate CSS screen, but all
-necessary plugins should become enabled when bsui starts and the
+necessary plugins should become enabled when |bsui| starts and the
 pilatus object is instantiated.
 
 
@@ -1237,7 +1251,7 @@ You can then click on the outline in the image to move or resize the ROI.
 Measurements with the Pilatus in bluesky
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In bsui, the total-counts statistic (from the STATS plugin) for ROI2
+In |bsui|, the total-counts statistic (from the STATS plugin) for ROI2
 is called ``diffuse`` and is hinted.  This means that the total count
 rate in the ROI will be recorded as a scalar in Tiled and that the
 count rate will be reported in the best effort callback table printed

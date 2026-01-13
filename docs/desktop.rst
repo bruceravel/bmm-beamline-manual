@@ -86,8 +86,16 @@ Data collection and visualization are separate things and should be
 managed separately.  
 
 On the main virtual desktop, open a terminal window for |bsui|.  At the
-command line type ``bsui``.  |bsui| startup at BMM is rather
-time-consuming, but after a couple minutes it is ready to go.
+command line do this to start |bsui| 
+
+.. code-block:: bash
+
+   cd ~/.ipython/profile_collection
+   pixi run start
+
+
+|bsui| startup at BMM is rather time-consuming, but after a couple
+minutes it is ready to go.
 
 
 On the right-most virtual desktop, you will setup the Kafka file and

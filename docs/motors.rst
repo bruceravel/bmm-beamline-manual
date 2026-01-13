@@ -68,28 +68,32 @@ These stages sit on top of the XAFS optical table.
    :name:  xafs-stages
    :align: left
 
-   ============== ===========  =========  =======================  =====================================
-   motor          type         units      notes                    directions
-   ============== ===========  =========  =======================  =====================================
-   ``xafs_x``     linear       mm         main sample stage        |plus| outboard, - inboard
-   ``xafs_y``     linear       mm         main sample stage        |plus| up, - down
-   ``xafs_detx``  linear       mm         detector mount           |plus| away from sample, - closer
-   ``xafs_dety``  linear       mm         detector mount           |plus| uo, - down
-   ``xafs_detz``  linear       mm         detector mount           |plus| downstream, - upstream
-   ``xafs_wheel`` rotary       degrees    *ex situ* sample wheel   |plus| clockwise, - |widdershins|
-   ``xafs_linxs`` linear       mm         ref wheel vertical       |plus| up, - down
-   ``xafs_ref``   rotary       degrees    reference stage          |plus| clockwise, - |widdershins|
-   ``xafs_refx``  linear       mm         reference stage          |plus| outboard, - inboard
-   ``xafs_refy``  linear       mm         reference stage          |plus| up, - down
-   ``xafs_pitch`` tilt         degrees    Huber tilt stage         |plus| more positive
-   ``xafs_roll``  tilt         degrees    Huber tilt stage         |plus| more positive
-   ``xafs_rots``  rotary       degrees    small rotary stage       |plus| clockwise, - |widdershins|
-   ``xafs_garot`` rotary       degrees    g.a. rotary stage        |plus| clockwise, - |widdershins|
-   ``xafs_yu``    linear       mm         u.s table jack           |plus| up, - down
-   ``xafs_ydo``   linear       mm         d.s o.b. table jack      |plus| up, - down
-   ``xafs_ydi``   linear       mm         d.s i.b. table jack      |plus| up, - down
-   ``xafs_spare`` linear       mm         spare linear stage       
-   ============== ===========  =========  =======================  =====================================
+   =============== ===========  =========  =======================  =====================================
+   motor           type         units      notes                    directions
+   =============== ===========  =========  =======================  =====================================
+   ``xafs_x``      linear       mm         main sample stage        |plus| outboard, - inboard
+   ``xafs_y``      linear       mm         main sample stage        |plus| up, - down
+   ``xafs_detx``   linear       mm         detector mount           |plus| away from sample, - closer
+   ``xafs_dety``   linear       mm         detector mount           |plus| uo, - down
+   ``xafs_detz``   linear       mm         detector mount           |plus| downstream, - upstream
+   ``xafs_wheel``  rotary       degrees    *ex situ* sample wheel   |plus| clockwise, - |widdershins|
+   ``xafs_linxs``  linear       mm         ref wheel vertical       |plus| up, - down
+   ``xafs_ref``    rotary       degrees    reference stage          |plus| clockwise, - |widdershins|
+   ``xafs_refx``   linear       mm         reference stage          |plus| outboard, - inboard
+   ``xafs_refy``   linear       mm         reference stage          |plus| up, - down
+   ``xafs_pitch``  tilt         degrees    Huber tilt stage         |plus| more positive
+   ``xafs_roll``   tilt         degrees    Huber tilt stage         |plus| more positive
+   ``xafs_rots``   rotary       degrees    small rotary stage       |plus| clockwise, - |widdershins|
+   ``xafs_garot``  rotary       degrees    g.a. rotary stage        |plus| clockwise, - |widdershins|
+   ``xafs_yu``     linear       mm         u.s table jack           |plus| up, - down
+   ``xafs_ydo``    linear       mm         d.s o.b. table jack      |plus| up, - down
+   ``xafs_ydi``    linear       mm         d.s i.b. table jack      |plus| up, - down
+   ``xafs_spare``  linear       mm         spare linear stage       
+   ``xafs_bsx``    linear       mm         beam stop stage          |plus| outboard, - inboard
+   ``xafs_bsy``    linear       mm         beam stop stage          |plus| up, - down
+   ``xafs_eigerx`` linear       mm         area detector stage      |plus| outboard, - inboard
+   ``xafs_eigery`` linear       mm         area detector stage      |plus| up, - down
+   =============== ===========  =========  =======================  =====================================
 
 g.a. = glancing angle |blackcircle|
 o.b. = outboard  |blackcircle|
@@ -160,6 +164,33 @@ Here are some photos identifying these axes:
    :align: center
 
    The spare linear stage: ``xafs_spare``.
+
+.. _fig-beamstop:
+.. figure:: _images/stages/beamstopxy_stages.jpg
+   :target: _images/beamstopxy_stages.jpg
+   :width: 70%
+   :align: center
+
+   The beam stop stages: ``xafs_bsx`` and ``xafs_bsy``.
+
+
+
+.. subfigure::  AB
+   :layout-sm: AB
+   :subcaptions: above
+   :gap: 8px
+   :name: fig-areadetector
+   :class-grid: outline
+
+   .. image:: _images/stages/areadetectorxy_stages.jpg
+
+   .. image:: _images/stages/detector_mounts.jpg
+
+   (Left) The area detector stages: ``xafs_bsx`` and ``xafs_bsy``.
+   (Right) Mounting rigs for the Eiger and Pilatus detectors.
+
+
+   
 
 
 
