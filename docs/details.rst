@@ -199,6 +199,44 @@ the in-hutch patch panel.
    :width: 100%
    :align: center
 
+
+Controls chores, unfinished
+---------------------------
+
+This is a list of things that never got done back in 2017-2018.  For
+the most part, none of these are a problem in any way.  The beamline
+operates just fine without these.  This section is simply an effort to
+capture these for posterity.
+
++ PI piezo controllers on ``dcm.pitch``, ``m2.pitch``, and
+  ``m3.pitch``. Some primitive controls are in place.  There is a box
+  on the BMM CSS Main Page for piezo controls.  But active feedback
+  was never developed for any of these three items. It is not hard to
+  imagine the ways that having active feedback might be helpful, but
+  these are not currently available.
+
+* Fully fleshed out trigonometry for M2 and M3.  This would include
+  careful calibration of distances.
+
+* Photon delivery system mode B.  This is the low energy, focused
+  mode.  The last time I looked at this, it seemed that the hard
+  limits on the M3 downstream axes were set just a bit too high.  It
+  is also not clear whether the XAS table can go low enough for this
+  delivery mode.
+
+* The VME crate is plugged into an unmaganged switch, which is then
+  plugged into the managed switch.  This is silly and unnecessary, but
+  has never been enough of a problem to fix.
+
+* The outlets in the FOE should be moved to the insides of the blue
+  stand to avoid having plugs get kicked when people are moving around
+  the back alley.  This seems expensive and not completely necessary,
+  but sure would be nice.
+
+* Encoder pizza box in Rack A is unconfingured.  It will likely never
+  get used.
+
+
 DCM 1st Xtal Equilibration
 --------------------------
 
@@ -255,8 +293,8 @@ delivery to the mono and the filter assemblies.
    found.  (Middle) A view into the FOE.  (Right) The inboard wall
    where the physical valve is found.
 
-Disabling an MCS8 axis after a move
------------------------------------
+Disabling MCS8 axes after move
+------------------------------
 
 From Adam Young at FMBO
 ~~~~~~~~~~~~~~~~~~~~~~~
