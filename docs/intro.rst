@@ -412,6 +412,28 @@ about 300 |mu| m by 250 |mu| m.
 Acknowledgements
 ----------------
 
+Pride of place goes to the late Jimmy Biancarosa and to Don Abel, the
+excellent technicians who helped build BMM and outfit it with kit
+that works.  Truly nothing would have ever happened at BMM without them.
+
+BMM's `Bluesky <https://blueskyproject.io/>`__ profile was mostly
+written by Bruce.  But this would not have happened without the help
+of several members of NSLS-II's DSSI program.  In particular, I want
+to thank Dan Allan, Tom Caswell, Josh Lynch, Jakub Wlodek, Max
+Rakitin, Dmitri Gavrilov, Stuart Campbell, Abby Giles, Garrett Bishof,
+Nate Maytan, Matt Snyder, Oksana Ivashkevych, Ryan Jaskiel, AJ Sliger,
+and Jun Ma.  
+
+Thanks to every BMM user |nd| being a BMM user means being a beta tester
+for the beamline software!
+
+BMM makes use of `lots of great python tools
+<https://speakerdeck.com/jakevdp/the-unexpected-effectiveness-of-python-in-science?slide=52>`__.
+Matt Newville's `Larch <http://xraypy.github.io/xraylarch/>`__ is used
+to process every XAS scan that gets measured and Matt's `lmfit
+<https://lmfit.github.io/lmfit-py/>`__ is used for many alignment
+chores.
+
 This documentation project uses `Sphinx
 <https://www.sphinx-doc.org/en/master/index.html>`__ and the lovely
 `{book}theme
@@ -421,28 +443,13 @@ from the `The Executable Book Project
 using the ``appendix.py`` extension from
 https://github.com/heig-tin-info/handout.
 
-BMM's `Bluesky <https://blueskyproject.io/>`__ profile was mostly
-written by Bruce.  But this would not have happened without the help
-of several members of NSLS-II's DSSI program.  In particular, I want
-to thank Dan Allan, Tom Caswell, Josh Lynch, Jakub Wlodek, Max
-Rakitin, Dmitri Gavrilov, Stuart Campbell, Abby Giles, Garrett Bishof,
-Nate Maytan, Matt Snyder, Oksana Ivashkevych, and Ryan Jaskiel.  And I
-need to thank every BMM user |nd| being a BMM user means being a beta
-tester for the beamline software!
-
-BMM makes use of `lots of great python tools
-<https://speakerdeck.com/jakevdp/the-unexpected-effectiveness-of-python-in-science?slide=52>`__.
-Matt Newville's `Larch <http://xraypy.github.io/xraylarch/>`__ is used
-to process every XAS scan that gets measured and Matt's `lmfit
-<https://lmfit.github.io/lmfit-py/>`__ is used for many alignment
-chores.
-
 This manual uses a GitHub action to build and deploy `(see details
 here)
 <https://github.com/marketplace/actions/sphinx-docs-to-github-pages>`__
 this document whenever a ``git push`` happens.  We are grateful to the
 `UIBCDF <https://github.com/uibcdf/action-sphinx-docs-to-gh-pages>`__
 developers for this continuous deployment capability.
+
 
 
 
