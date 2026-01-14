@@ -441,7 +441,7 @@ Some photos of the patch panel:
    the CAT6 cables in the DM3 patch panel
 
 
-.. eiger_
+.. _eiger:
 
 Eiger2 Si 4M
 ------------
@@ -449,6 +449,10 @@ Eiger2 Si 4M
 .. |br| raw:: html
 
       <br>
+
+.. note:: Note that the vendor supplied camera server,
+   ``xf06bm-eiger1``, is found in rack C2
+
 
 .. _fig-eiger:
 .. figure:: _images/detectors/eiger.jpg
@@ -919,13 +923,33 @@ XF:06BMA-BI{XAFS-Ax:Tbl_XD}Mtr            :red:`xafs_detx`      xafs detector st
    Axis 4 suffered a damaged amplifier.  After replacing the motor,
    the ``xafs_detx`` was placed on axis 5.
 
-   Axis 4 on MC07 is out of service. ``xafs_xu`` and ``xafs_xd`` have
-   been moved to MC09, axes 4 and 5
+   Axis 4 on MC07 is out of service. ``xafs_xu`` and ``xafs_xd`` are
+   not currently connected to a motor controller.
 
 
 XAFS Stages
 ~~~~~~~~~~~
 
+Note that, over time, some of the consistency between the EPICS
+nomenclature and the ophyd nomenclature has diverged.  For example,
+the EPICS and ophyd names for ``xafs_pitch`` and ``xafs_roll`` are
+mismatched due to how we chose to mount the :numref:`Huber tilt stage
+(see Section %s) <tilt-stage>`.
+
+More recently, the sample XY stages were replaced with encoded stages.
+The older sample stages |nd| channels 1 and 2 on MC08 |nd| were
+repurposed for holding the :numref:`Eiger (section %s) <eiger>` or
+:numref:`Pilatus (section %s) <pilatus>` area detectors.  The new,
+encoded stages are on channels 6 and 7 on MC09.  Happily, the EPICS
+names on channel 9 do not try to capture the purpose of the axis.  The
+semantic naming of those axes is better left for the ophyd layer.
+
+.. note::
+   In cabinet 4, there are some useful stages that are unused.  
+
+   #. a Huber theta/2theta stage
+   #. a Huber theta stage
+   #. a set of 4-axis slits.
 
 XAFS stages on MC08
 *******************
@@ -933,12 +957,12 @@ XAFS stages on MC08
 ======================================  ==================  ===============================  ======================  ==============
 PV                                      alias               Motor Description                controller              motor number
 ======================================  ==================  ===============================  ======================  ==============
-XF:06BMA-BI{XAFS-Ax:LinY}Mtr            xafs_liny           xafs sample y                    MC08 (RGC1)             1
-XF:06BMA-BI{XAFS-Ax:LinX}Mtr            xafs_linx           xafs sample x                    MC08 (RGC1)             2
+XF:06BMA-BI{XAFS-Ax:LinY}Mtr            xafs_eigery         area detector y                  MC08 (RGC1)             1
+XF:06BMA-BI{XAFS-Ax:LinX}Mtr            xafs_eigerx         area detector x                  MC08 (RGC1)             2
 :strike:`XF:06BMA-BI{XAFS-Ax:LinS}Mtr`  :strike:`xafs_det`  :strike:`xafs reference stage`   :strike:`MC08 (RGC1)`   :strike:`3`
 XF:06BMA-BI{XAFS-Ax:LinXS}Mtr           xafs_refy           xafs reference y                 MC08 (RGC1)             4
-XF:06BMA-BI{XAFS-Ax:Pitch}Mtr           xafs_pitch          xafs pitch stage                 MC08 (RGC1)             5
-XF:06BMA-BI{XAFS-Ax:Roll}Mtr            xafs_roll           xafs tilt stage                  MC08 (RGC1)             6
+XF:06BMA-BI{XAFS-Ax:Pitch}Mtr           xafs_roll           xafs roll stage                  MC08 (RGC1)             5
+XF:06BMA-BI{XAFS-Ax:Roll}Mtr            xafs_pitch          xafs pitch stage                 MC08 (RGC1)             6
 XF:06BMA-BI{XAFS-Ax:Ref}Mtr             xafs_ref            xafs reference wheel             MC08 (RGC1)             7
 XF:06BMA-BI{XAFS-Ax:Mtr8}Mtr            xafs_garot          glancing rotation                MC08 (RGC1)             8
 ======================================  ==================  ===============================  ======================  ==============
@@ -954,10 +978,6 @@ XF:06BMA-BI{XAFS-Ax:Tbl_RotB}Mtr        xafs_wheel          xafs wheel stage    
 XF:06BMA-BI{XAFS-Ax:Tbl_RotS}Mtr        xafs_rots           xafs small rot stage             MC07 (RGC1)             8
 ======================================  ==================  ===============================  ======================  ==============
 
-.. note::
-   In cabinet 4, there are two useful stages that are unused.  One is
-   a Huber theta/2theta stage.  The other is a set of 4-axis slits.
-
 
 XAFS stages on MC09
 *******************
@@ -968,8 +988,10 @@ PV                                      alias               Motor Description   
 XF:06BMA-BI{MC:09-Ax:1}Mtr              xafs_dety           xafs detector stage y            MC09 (RGC1)             1
 XF:06BMA-BI{MC:09-Ax:2}Mtr              xafs_detz           xafs detector stage z            MC09 (RGC1)             2
 XF:06BMA-BI{MC:09-Ax:3}Mtr              xafs_spare          spare xafs stage                 MC09 (RGC1)             3
-XF:06BMA-BI{MC:09-Ax:4}Mtr              xafs_xu             xafs detector stage y            MC09 (RGC1)             4
-XF:06BMA-BI{MC:09-Ax:5}Mtr              xafs_xd             xafs detector stage y            MC09 (RGC1)             5
+XF:06BMA-BI{MC:09-Ax:4}Mtr              xafs_bsx            beam stop stage y                MC09 (RGC1)             4
+XF:06BMA-BI{MC:09-Ax:5}Mtr              xafs_bsy            beam stop stage y                MC09 (RGC1)             5
+XF:06BMA-BI{MC:09-Ax:6}Mtr              xafs_x              xafs sample stage x              MC09 (RGC1)             4
+XF:06BMA-BI{MC:09-Ax:7}Mtr              xafs_y              xafs sample stage y              MC09 (RGC1)             5
 ======================================  ==================  ===============================  ======================  ==============
 
 Gonimeter circles
