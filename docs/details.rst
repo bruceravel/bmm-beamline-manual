@@ -13,6 +13,8 @@
 .. role:: key
     :class: key
 
+.. role:: darkyellow
+
 .. _details:
 
 Instrumentation Details
@@ -27,7 +29,8 @@ page.  This is basically an attempt to capture institutional knowledge
 Analog Video Capture
 --------------------
 
-Implementing `this USB video adapter
+Implementing `the REDGO Video Audio VHS VCR USB Video Capture Card to
+DVD Converter Capture Card Adapter
 <https://www.amazon.com/REDGO-Video-Capture-Converter-Adapter/dp/B01E5ITE2W>`__
 to capture video from the small analog cameras in the hutch took a bit
 of doing.
@@ -107,6 +110,16 @@ write to storage.
    As of December 2024, this has been captured in BMM's ansible
    configuration.  Thus xf06bm-ws3 should always have this udev rule
    available, even after a system upgrade or installation.
+
+.. admonition:: Update
+   :class: note
+
+   As of January 2026, this camera is no longer being captured as part
+   of the experimental metadata.  All of this infrastructure is in
+   place, so images *can* be captured.  They just aren't captured
+   automatically any more.  This decision was made for data security
+   and data management considerations.
+
 
 
 Beamline maintenance tools
@@ -200,6 +213,8 @@ the in-hutch patch panel.
    :align: center
 
 
+.. _unfinished_controls:
+
 Controls chores, unfinished
 ---------------------------
 
@@ -235,6 +250,10 @@ capture these for posterity.
 
 * Encoder pizza box in Rack A is unconfingured.  It will likely never
   get used.
+
+
+See also :numref:`Section %s <future_instruments>` for the related
+topic of planned instrumentation upgrades.
 
 
 DCM 1st Xtal Equilibration
@@ -712,6 +731,22 @@ be helpful.  But remember that purging the ion chambers takes
 Logitech controller
 -------------------
 
+.. caution::
+
+   The Logitech controllers are handy, but scary.  They are not a toy.
+   If you play around with one, you are likely to ruin your experiment.
+
+
+There are two Logitech controllers configured to move particular
+motors at the beamline.  One controller lives permanently inside the
+hutch, usually located on the white box hanging from the side of
+diagnostic module 3.  The other lives permanently outside the hutch in
+the clear plastic box next to the control station.
+
+The purpose of the Logitech controllers is to facilitate rough
+alignment of sample in the beam. The assumption is that careful
+alignment will be done with X-rays.
+
 .. _fig-logitech:
 .. figure:: _images/instrumentation/Logitech.png
    :target: _images/Logitech.png
@@ -719,11 +754,39 @@ Logitech controller
    :align: center
 
 
+:green:`Green A button`
+   Open the photon shutter (outside controller only)
+
+:red:`Green B button`
+   Open the photon shutter (outside controller only)
+
+:blue:`Blue X button`
+   Fully retract the detector, move ``xafs_detx`` to 205
+
+:darkyellow:`Yellow Y button`
+   Disable amplifiers on ``dcm.pitch``, ``dcm.roll``, and
+   ``m2.bender``, equivalent to ``dcm.kill()`` + ``m2.bender.kill()``
+   at the |bsui| command line
+
+Right joystick
+   Control the sample XY stage
+
+Left joystick
+   Control the detector Z stage (left/right, up/down do nothing)
+
+Right trigger buttons
+   Rotate the reference wheel
+
+Left trigger buttons
+   Rotate the *ex situ* sample wheel
+
+Logitech button
+   Wake up the controller
+
+
 .. todo::
 
-   Explain how to configure buttons in CSS
-
-.. todo::  Left joystick will be used for detector YZ.  Not X!
+   Explain how to configure controls in CSS
 
 
 M2 Bender
@@ -753,6 +816,28 @@ MC09 patch panel
 
 Photo and explain...
 
+
+MCS8 network configuration
+--------------------------
+
+Among the curiosities of managing the FMBO MCS8 TurboPMAC motor
+controllers delivered as part of the original construction of the
+beamline, there is the matter of network configuration.  While there
+is a tool on the NIST Windows 8 laptop for configuring the IP address
+of the MCS8 over a USB cable, there is a bit of work that has to be
+done for IP configuration to take effect.
+
+The MCS8 units have something called EEPROM Write Protection which
+keeps the IP configuration from being changed by accident.  At least,
+I suppose that's the purpose...
+
+To bypass write protection, there is a jumper on one of the circuit
+boards that has to be in place.  Here is :download:`a PDF file
+explaining how to do this <_static/MCS8-E8-jumper.pdf>`.
+
+MC01 through MC06 are FMBO-supplied controllers.  These cover the
+entire photon delivery system up to diagnostic module 3.  None of the
+XAS or XRD end stations use these controllers.
 
 
 Motor controllers
