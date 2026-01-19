@@ -221,6 +221,7 @@ you can arrive with samples pre-mounted and ready to be measured.  You
 may keep the sample holders to use again the next time you visit BMM.
 
 
+.. _electrochemisty:
 
 Electrochemistry
 ----------------
@@ -402,4 +403,37 @@ about the Z axis (Rz, yaw), pitch (Rx), or roll (Ry).
 + Rotation stage mechanical drawing: :download:`JPG <_static/RT-2-11-DIMENSIONS.JPG>`
 
 
+.. _future_instruments:
 
+Future Instrumentation
+----------------------
+
+This is an unordered list of instrumentation developments that will
+hopefully happen in the coming years. (This is being written in
+2026-1.)
+
++ Integration of `Anton-Parr heating stage
+  <https://www.anton-paar.com/us-en/products/details/domed-hot-stage-for-four-circle-goniometers-dhs-1100/>`__,
+  including spreadsheet automation and a dedicated IOC.
+
++ Full integration of :numref:`Eiger4 (see Section %s) <eiger>`
+
++ Workflows for using Pilatus & Eiger with XAS experiments,
+  e.g. monitor one or more closely spaced diffraction peaks during an
+  *in situ* experiment
+
++ Fly-scanning the monochromator, integration of fly-scanning
+  into XAS workflow
+
++ Speadsheet-to-queueserver
+
++ Trigger-in and trigger-out with :numref:`BioLogic (see Section %s)
+  <electrochemisty>`, electrochemistry spreadsheets
+
++ More regular use of electron yield
+
++ Feedback on mirror pitch to maintain peak intensity while moving
+  energy in fixed exit mode
+
+See also :numref:`Section %s <unfinished_controls>` for the related
+topic of unfinished controls chores.

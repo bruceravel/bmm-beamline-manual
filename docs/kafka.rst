@@ -201,6 +201,9 @@ consumer is programmed to recognize.
    <https://docs.bokeh.org/en/latest/index.html>`__.
 
 
+.. todo:: there are more plot actions that need to be documented.
+
+
 
 .. _liveline:
 
@@ -523,8 +526,10 @@ messages to ``add`` to the plot, and a message to ``stop`` the plot is
 the common thread to how BMM uses Kafka to make plots, both static and
 real-time plots.
 
+Goniometer plots
+~~~~~~~~~~~~~~~~
 
-.. todo:: there are more plot actions that need to be documented.
+.. todo:: Document plots made for goniometer alignment and XRR scans
 
 Headless and visualization workers
 ----------------------------------

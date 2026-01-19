@@ -37,7 +37,6 @@ documentation manual.
 #. Document using the Xspress3
 #. Better abstraction of spreadsheet-to-macro components, less cargo-cult code
 #. Document how redis is used at the BL, explain state+redis+BMMuser object
-#. Section about instrumentation development plans at BL
 #. Document timescan and SEAD, discuss in plotting section
    Citation: A Filipponi et al 1998 J. Phys.: Condens. Matter 10 235 DOI:
    10.1088/0953-8984/10/1/026
