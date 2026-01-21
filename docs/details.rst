@@ -213,6 +213,55 @@ the in-hutch patch panel.
    :align: center
 
 
+Bragg axis drive train
+----------------------
+
+The Bragg axis drive train has been a recurring source of trouble at
+BMM.  In the past, the point of coupling between the drive motor and
+the Bragg goniometer has been the main issue.  This coupling is made
+between the spindle of the drive motor and the goniometer's work gear
+via a bellows.  Despite assurances from the mono vendor that this
+drive train has been reliable on all other similar goniometers
+(including 3 others here at NSLS-II), BMM has is on its fifth bellows
+as of January 2026.
+
+The part in question is shown in :numref:`Figure %s <fig-braggaxis>`.
+An example of a sheared bellows is shown in :numref:`Figure %s
+<fig-shearedbellows>`.
+
+In January of 2026, we have observed that the worm gear of the
+goniometer is turning unreliably.  Removing the drive train and
+turning the worm gear by hand reveals that, as the gear rotates, there
+are two regions of different resistance to rotation.  When the motor
+is driven over those points, the controller reliably suffers an
+encoder count loss error.  This precludes operation of the mono.
+
+.. todo:: Explain what we did to fix things.  But first fix things.
+
+.. _fig-braggaxis:
+.. figure:: _images/infrastructure/bragg_axis.jpg
+   :target: _images/bragg_axis.jpg
+   :width: 70%
+   :align: center
+
+   The Bragg axis drive train
+
+.. _fig-shearedbellows:
+.. figure:: _images/infrastructure/sheared_bellows.jpg
+   :target: _images/sheared_bellows.jpg
+   :width: 70%
+   :align: center
+
+   An example of a sheared bellows
+
+Replacement bellows purchased from HUCO are in cabinet #4 in a gray
+bin labeled "Photon delivery system spare parts". 
+
+These bellows can be purchased directly from HUCO:
+`HUCO 530-41, 41 mm Diameter Bellows Coupling
+<https://www.huco.com/shop/couplings/bellows-couplings/bellows-flex-b/530-41?b1=24&b2=24>`__
+with one bore size of |half| inch and the other |quarter| inch.
+
 .. _unfinished_controls:
 
 Controls chores, unfinished

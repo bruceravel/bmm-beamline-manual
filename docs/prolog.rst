@@ -70,3 +70,6 @@
 .. |cirarr| unicode:: U+2B8A .. RIGHTWARDS BLACK CIRCLED WHITE ARROW
 .. |harr| unicode:: U+1F846 .. RIGHTWARDS HEAVY ARROW
 .. |download| unicode:: U+2398 .. NEXT PAGE
+
+.. |half| unicode:: U+00BD .. Vulgar Fraction One Half
+.. |quarter| unicode:: U+00BC .. Vulgar Fraction One Quarter
