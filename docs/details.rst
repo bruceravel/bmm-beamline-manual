@@ -213,54 +213,6 @@ the in-hutch patch panel.
    :align: center
 
 
-Bragg axis drive train
-----------------------
-
-The Bragg axis drive train has been a recurring source of trouble at
-BMM.  In the past, the point of coupling between the drive motor and
-the Bragg goniometer has been the main issue.  This coupling is made
-between the spindle of the drive motor and the goniometer's work gear
-via a bellows.  Despite assurances from the mono vendor that this
-drive train has been reliable on all other similar goniometers
-(including 3 others here at NSLS-II), BMM has is on its fifth bellows
-as of January 2026.
-
-The part in question is shown in :numref:`Figure %s <fig-braggaxis>`.
-An example of a sheared bellows is shown in :numref:`Figure %s
-<fig-shearedbellows>`.
-
-In January of 2026, we have observed that the worm gear of the
-goniometer is turning unreliably.  Removing the drive train and
-turning the worm gear by hand reveals that, as the gear rotates, there
-are two regions of different resistance to rotation.  When the motor
-is driven over those points, the controller reliably suffers an
-encoder count loss error.  This precludes operation of the mono.
-
-.. todo:: Explain what we did to fix things.  But first fix things.
-
-.. _fig-braggaxis:
-.. figure:: _images/infrastructure/bragg_axis.jpg
-   :target: _images/bragg_axis.jpg
-   :width: 70%
-   :align: center
-
-   The Bragg axis drive train
-
-.. _fig-shearedbellows:
-.. figure:: _images/infrastructure/sheared_bellows.jpg
-   :target: _images/sheared_bellows.jpg
-   :width: 70%
-   :align: center
-
-   An example of a sheared bellows
-
-Replacement bellows purchased from HUCO are in cabinet #4 in a gray
-bin labeled "Photon delivery system spare parts". 
-
-These bellows can be purchased directly from HUCO:
-`HUCO 530-41, 41 mm Diameter Bellows Coupling
-<https://www.huco.com/shop/couplings/bellows-couplings/bellows-flex-b/530-41?b1=24&b2=24>`__
-with one bore size of |half| inch and the other |quarter| inch.
 
 .. _unfinished_controls:
 
@@ -610,7 +562,7 @@ that needs to be documented.
 Executive summary: that axis does not use its encoder.  It homes by
 running to its negative limit, then running back to it's home
 position.  It does this by counting controller pulses rather than
-encoder 
+encoder counts.
 
 Here are a couple of useful emails from Graeme to me from January 11
 and 12, 2018.
@@ -885,8 +837,168 @@ boards that has to be in place.  Here is :download:`a PDF file
 explaining how to do this <_static/MCS8-E8-jumper.pdf>`.
 
 MC01 through MC06 are FMBO-supplied controllers.  These cover the
-entire photon delivery system up to diagnostic module 3.  None of the
-XAS or XRD end stations use these controllers.
+entire photon delivery system up to diagnostic module 3.  All of the
+XAS or XRD end station motors use NSLS-II standard Geobricks.
+
+Monochromator notes
+-------------------
+
+The Bragg axis drive train has been a recurring source of trouble at
+BMM.  In the past, the point of coupling between the drive motor and
+the Bragg goniometer has been the main issue.  This coupling is made
+between the spindle of the drive motor and the goniometer's work gear
+via a bellows.  Despite assurances from the mono vendor that this
+drive train has been reliable on all other similar goniometers
+(including 3 others here at NSLS-II), BMM has is on its fifth bellows
+as of January 2026.
+
+The part in question is shown in :numref:`Figure %s <fig-braggaxis>`.
+An example of a sheared bellows is shown in :numref:`Figure %s
+<fig-shearedbellows>`.
+
+
+.. _fig-braggaxis:
+.. figure:: _images/infrastructure/bragg_axis.jpg
+   :target: _images/bragg_axis.jpg
+   :width: 70%
+   :align: center
+
+   The Bragg axis drive train. The bellows coupler is inside the part
+   indicated with the red arrow and circle.
+
+.. _fig-shearedbellows:
+.. figure:: _images/infrastructure/sheared_bellows.jpg
+   :target: _images/sheared_bellows.jpg
+   :width: 70%
+   :align: center
+
+   An example of a sheared bellows
+
+Replacement bellows purchased from HUCO are in cabinet #4 in a gray
+bin labeled "Photon delivery system spare parts". 
+
+These bellows can be purchased directly from HUCO:
+`HUCO 530-41, 41 mm Diameter Bellows Coupling
+<https://www.huco.com/shop/couplings/bellows-couplings/bellows-flex-b/530-41?b1=24&b2=24>`__
+with one bore size of |half| inch and the other |quarter| inch.
+
+Bragg axis failure
+~~~~~~~~~~~~~~~~~~
+
+In the first half of the 2026-1 cycle, we spent some time repairing
+several problems with the monochromator.
+
+The troubles began with a failure of the Bragg axis to move without
+encoder loss error.  Some preliminary investigation showed that the
+drive shaft was behaving as though the worm gear was losing contact
+on every revolution with the teeth of the goniometer stage.
+
+After removing the whole crystal cage from the FOE and disassembling
+the mono, we found three problems that together resulted in the loss
+of the Bragg axis:
+
+1. The o-rings on the vacuum feed-through were abraded, causing
+   additional resistance to rotation.  New o-rings were purchase,
+   installed a lubricated.  Additional 0-rings can be found in the
+   photon delivery supplies bin in Cabinet 8.
+
+2. The lubricant on the spring inside the pre-load assembly for the
+   Bragg drive train was dried up and crusty, causing the spring not
+   to retract and release freely.  This spring was cleaned and
+   relubricated. 
+
+3. The lateral retaining clamps on the work gear |nd| two small steel
+   plates bolted to the side of the worm gear assembly |nd| were
+   broken.  New plates were procured from the goniometer vendor, `RPI
+   <https://www.rpiuk.com/>`__, and installed.  Two additional plates
+   are in the photon delivery supplies bin in Cabinet 8.
+
+The likely result of these three issues was that the enhanced friction
+on the rotary feed-through along with the sticky pre-load was causing
+the gearing to become disengaged on every revolution.
+
+Once all this was repaired and replaced, the Bragg axis moved well.
+
+.. admonition:: Bragg axis coordinate system
+   :class: note
+
+   Note that the coordinate system of the Bragg axis is not consistent
+   with the NSLS-II coordinate system.  The rotation sense of the
+   Bragg axis is left-handed!  This means the parity of the limit
+   switches is opposite of what you might expect.
+
+
+.. _fig-braggcoordinate:
+.. figure:: _images/monochromator/bragg_coordinate_system.png
+   :target: _images/bragg_coordinate_system.png
+   :width: 75%
+   :align: center
+
+   The coordinate system used by the monochromator motor controller,
+   MC02.  Figure taken from the manual provided by the vendor, XDS
+   Oxford.
+
+
+.. admonition:: Encoder setting for the Bragg axis
+   :class: note
+
+   The encoder directional sense must be set correctly for the primary
+   and secondary Bragg encoders.  The PMAC variables ``I7010`` and
+   ``I7020`` both must be set to 7.  This detail is recorded here as
+   it proved to be a source of confusion as we were troubleshooting.
+
+Bragg encoder
+~~~~~~~~~~~~~
+
+One problem we had during the 2026-1 repair effort involved the
+encoder for the Bragg axis.  :numref:`Figure %s <fig-axialencoder>`
+shows a confusing view of the Bragg axis.  This view is behind the
+mounting plate for the crystal cage, looking down the beam direction
+along the door of the vacuum vessel.  
+
+.. _fig-axialencoder:
+.. figure:: _images/monochromator/axial_encoder.jpg
+   :target: _images/axial_encoder.jpg
+   :width: 75%
+   :align: center
+
+   The encoder for the Bragg axis.  The encoder read-head is indicated
+   by the red arrow.  The magnet for the Hall sensor is circled in
+   magenta.
+
+
+As we started doing motion testing, the cable leading to the read head
+was not dressed correctly.  As we moved to a high angle (i.e. a low
+energy orientation), the cable caught on a tab holding the magnet for
+the Hall sensor in the encoder read-head.  This stretched and damaged
+the cable, breaking communication with the interpolator.  This was
+fixed by replacing the read-head.
+
+However, this read-head (model number RGH20F30M03C) is long obsolete.
+Renishaw no longer sells this model and it was (at the time of the
+2026-1 repair effort) unavailable on eBay.  Happily, XDS Oxford had an
+unopened spare in their shop which they kindly gave to us.
+
+In future interventions |nd| for instance scheduled maintenance of the
+rotary feed through |nd| it is **essential** that great care is taken
+to dress that cable correctly.  Replacing it again with the same model
+will almost certainly be impossible.
+
+
+Pitch motor cable
+~~~~~~~~~~~~~~~~~
+
+As part of the 2026-1 repairs, the motor cable to  the pitch axis was
+partly re-wired and is now using a different DB15 vacuum feedthrough
+compared to what is documented in the original vendor supplied
+documentation. 
+
+The DB15 feedthrough is correctly labeled on the exterior of the
+vacuum vessel.
+
+This is mentioned to document this discrepancy with the vendor
+documentation.
+
 
 
 Motor controllers
@@ -894,7 +1006,7 @@ Motor controllers
 
 This section is a big, long list of all the motor PV names at BMM.
 
-Most motors have aliases.  The alias is an alternate, easier-to-type
+Some motors have aliases.  The alias is an alternate, easier-to-type
 name for the axis.  These are equivalent:
 
 .. code-block:: sh
@@ -902,7 +1014,7 @@ name for the axis.  These are equivalent:
    caget XF:06BMA-OP{Mono:DCM1-Ax:Bragg}Mtr
    caget xafs_bragg
 
-Aliases work with most motor record fields, as well.  The following are
+Aliases work with motor record fields, as well.  The following are
 also equivalent:
 
 .. code-block:: sh
