@@ -305,21 +305,99 @@ to load data from your proposal folder.
 Using the VDI virtual Desktop
 -----------------------------
 
-.. todo:: Details needed
+NSLS-II offers a virtual desktop which can be used to examine your
+data and perform other chores related to your beamline visit.  This
+virtual desktop will open a Red Hat Enterprise Linux session either in
+your web browser or in the Omnissa client app.
 
-Outline:
+To start, point your browser at https://vdi.nsls2.bnl.gov/.
 
-+ Point your browser at https://vdi.nsls2.bnl.gov/
-+ Either download the client app or use the browser.  These are the
-  two choices offered on the landing page.
-+ Open an N2SN linux desktop
-+ In terminal or with file browser, can navigate to
-  ``/nsls2/data/bmm/proposals/<cycle>/pass-123456``.
+Either download the client app or use the browser.  The client
+performs better than the browser app, but does involved installation
+of the Monissa software on your computer.
 
-Issues:
+.. _fig-omnissa_download:
+.. figure:: _images/datasec/omnissa_download.png
+   :target: _images/omnissa_download.png
+   :width: 50%
+   :align: center
 
-+ Need to give advice on navigating linux desktop
-+ Seems to be no Athena
+   The landing page at https://vdi.nsls2.bnl.gov/ prompts you to
+   download the Omnissa client or continue with the browser app.
+
+In either the client or the browser, configure the app to use the VDI
+server at ``vdi.nsls2.bnl.gov``.
+
+.. _fig-omnissa_config:
+.. figure:: _images/datasec/omnissa_config.png
+   :target: _images/omnissa_config.png
+   :width: 50%
+   :align: center
+
+   Once in the Omnissa app, click the "New Server" button and enter
+   ``vdi.nsls2.bnl.gov`` in the box.
+
+
+Now double click on the box labeled ``vdi.nsls2.bnl.gov``.
+Alternately, right click :mark:`rightclick,.` on the box and select
+"Connect".
+
+
+.. _fig-omnissa_connect:
+.. figure:: _images/datasec/omnissa_connect.png
+   :target: _images/omnissa_connect.png
+   :width: 50%
+   :align: center
+
+   Connect to the server at ``vdi.nsls2.bnl.gov``.
+
+
+You will be presented with a dialog asking you to authenticate using
+your BNL domain name and password + DUO two factor authentication.
+Once you have done so, you are presented with two options for VMs.
+One is configured to be a working desktop, the other is configured for
+monitoring the beamline.
+
+Double click on the "N2SN Linux Desktop" or right click
+:mark:`rightclick,.` and select "Launch".
+
+.. _fig-omnissa_vms:
+.. figure:: _images/datasec/omnissa_vms.png
+   :target: _images/omnissa_vms.png
+   :width: 50%
+   :align: center
+
+   Virtual machine choices at ``vdi.nsls2.bnl.gov``.
+
+Once the VM opens, you can open a terminal window (or a web browser or
+a bunch of other things) by clicking on the "Activities" button in the
+upper left corner.
+
+In the terminal window, you can navigate to your proposal folder by
+issuing the command:
+
+.. code-block:: bash
+
+   cd /nsls2/data/bmm/proposal/2026-1/123456
+
+Substituting the ``2026-1/123456`` with the location of your
+experiment's proposal folder.  You can then open Athena, prefereable
+with this command
+
+.. code-block:: bash
+
+   dathena >/dev/null 2>&1 &
+
+
+.. _fig-virtual_desktop:
+.. figure:: _images/datasec/virtual_desktop.png
+   :target: _images/virtual_desktop.png
+   :width: 100%
+   :align: center
+
+   The Linux desktop with an open terminal window, Athena, and plot of
+   data.
+
 
 
 Accessing data via Tiled

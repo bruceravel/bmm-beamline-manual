@@ -101,21 +101,30 @@ To submit a SAF: https://pass.bnl.gov
 
 If your experiment requires **chemicals, compressed gases, lab access,
 or other equipment**, please contact Bruce Ravel (bravel@bnl.gov) well
-ahead of your expriment.  Transportation of hazardous materials
-related to your experiment to the BNL site and back to the home
-institution is your responsibility.
+ahead of your experiment.  
 
-If your experiment involves **radiological materials** (including
-depleted uranium), it is essential that you submit your SAF as early
-as possible to allow plenty of time for safety review. The SAF should
-include an attachment that clearly itemizes isotopes present including
-masses and activities for each isotope.
+If your experiment involves **radiological materials**, it is
+essential that you submit your SAF as early as possible to allow
+plenty of time for safety review. The SAF should include an attachment
+that clearly itemizes isotopes present including masses and activities
+for each isotope.  *Depleted uranium* and *naturally occurring uranium
+or thorium* are considered radiological materials and must be handled
+as such at BNL.
 
+.. _support-laboratories:
 
 Support Laboratories
 --------------------
 
-Currently, four labs support user activities at BMM.  They are:
+.. admonition:: Note
+   :class: important
+
+   Each lab you select on your safety approval form makes work
+   for the lab stewards.  Only request the lab(s) that you
+   actually intend to use.
+
+
+Four labs cover most user activities at BMM.  They are:
 
 + Lab 3L-L06: XAS Sample Prep Lab
 + Lab 3L-L07: Environmental Science Wet Lab
@@ -144,10 +153,11 @@ Solid sample preparation (pellet pressing, spreading on tape, etc)
 
 Liquid samples (organic solvents, acids, bases) and simple chemistry
   Request Lab 3L-L09.
-  
-Hydrofluoric acid treatment
-  Request Lab 3L-L09 and notify the Cognizant Space Manager, Syed Khalid
-  (khalid@bnl.gov), as soon as possible. 
+
+..
+  Hydrofluoric acid treatment
+    Request Lab 3L-L09 and notify the Cognizant Space Manager, Syed Khalid
+    (khalid@bnl.gov), as soon as possible. 
 
 Environmental and earth science sample preparation and treatment
   Request Lab 3L-L07. 
@@ -160,6 +170,16 @@ Environmental and earth science sample preparation and treatment
 Electrochemistry and battery science
   Request Lab 4L-L09.
 
+Special chemistry
+  There are some activities that cannot be performed in the 4 labs
+  above. For example, nitric acid, hydrochloric acid, or Piranha etch
+  can only be used in lab 4LL08. A tube furnace for preparation of
+  catalysts is available in Lb 1LL07. You are certainly welcome to
+  request other labs if required by your experiment.  :red:`Please
+  make sure that beamline staff is aware of your needs prior to
+  submitting your SAF.`
+
+
 .. admonition:: Radiological samples
    :class: caution
 
@@ -171,12 +191,15 @@ Electrochemistry and battery science
    samples at NSLS-II and must be treated as such.
 
 Requests for using gloveboxes should be discussed prior to submitting
-the SAF, contact Bruce Ravel (bravel@bnl.gov) and/or Syed Khalid
-(khalid@bnl.gov)
+the SAF, contact Bruce Ravel (bravel@bnl.gov) and/or the relevantlab
+manager listed at https://www.bnl.gov/nsls2/labs.
 
-.. important:: Each lab you select on your safety approval form makes work
-	       for the lab stewards.  Only request the lab(s) that you
-	       actually intend to use.
+.. admonition:: Note
+   :class: important
+
+   Each lab you select on your safety approval form makes work
+   for the lab stewards.  Only request the lab(s) that you
+   actually intend to use.
 
 Training
 --------
@@ -292,7 +315,10 @@ You will not compensated for beamtime lost to delays in sample delivery.
 The Day of your Experiment
 --------------------------
 
-.. note:: Unless told otherwise, your experiment starts at 8 am.  
+.. admonition:: Note
+   :class: hint
+
+   Unless told otherwise, your experiment starts at 8 a.m.  
 
 .. admonition:: As of May 2025
    :class: note
@@ -325,4 +351,5 @@ or contact BMM beamline staff for more information.
    non-office areas, which includes the experimental floor and sample
    preparation laboratories.
 
-   Pants with extensive ripping do not meet this PPE requirement.
+   Note that jeans with extensive ripping do not meet this PPE
+   requirement.
