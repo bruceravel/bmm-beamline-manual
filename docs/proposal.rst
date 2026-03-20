@@ -55,6 +55,14 @@ beamline staff how you intend to use your beamtime effectively.
    your beamtime proposal, contact the beamline staff well before the
    proposal deadline.
 
+.. admonition:: Lab Selection
+   :class: attention
+
+   Please think ahead for your laboratory needs should you get
+   beamtime.  See :numref:`Section %s <support-laboratories>` for a
+   discussion on the labs available here at NSLS-II.
+
+
 XRD Experiments
 ---------------
 
@@ -89,6 +97,13 @@ review.
    your beamtime proposal, contact the beamline staff well before the
    proposal deadline.
 
+.. admonition:: Lab Selection
+   :class: attention
+
+   Please think ahead for your laboratory needs should you get
+   beamtime.  See :numref:`Section %s <support-laboratories>` for a
+   discussion on the labs available here at NSLS-II.
+
 
 Multi-modal Experiments
 -----------------------
@@ -115,6 +130,14 @@ route your work through the review system correctly.
    A proposal requesting both XAS and XRD at BMM will be denied at
    feasibility and a link to this web page with be given as the
    reason.
+
+
+.. admonition:: Lab Selection
+   :class: attention
+
+   Please think ahead for your laboratory needs should you get
+   beamtime.  See :numref:`Section %s <support-laboratories>` for a
+   discussion on the labs available here at NSLS-II.
 
 NIST Partner User Proposals
 ---------------------------
@@ -209,3 +232,11 @@ with a sentence or two.
    Selecting the cycle for the beam time request.
 
 Any questions?  Contact Bruce (bravel@bnl.gov).
+
+
+.. admonition:: Lab Selection
+   :class: attention
+
+   Please think ahead for your laboratory needs should you get
+   beamtime.  See :numref:`Section %s <support-laboratories>` for a
+   discussion on the labs available here at NSLS-II.
