@@ -83,7 +83,7 @@ continuous scanning on the monochromator.
 Configuration in bsui profile
 -----------------------------
 
-It is intended to be easy to configure ``bsui`` to switch easily
+It is intended to be easy to configure |bsui| to switch easily
 between ion chambers and electrometers.
 
 In `BMM_configuration.ini

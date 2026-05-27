@@ -29,9 +29,9 @@ At Dan Allan's suggestion, we took a different approach.
 The startup folder
 ------------------
 
-The startup folder is a symlink to a folder on Lustre where BMM's
-profile is kept.  If |bsui| does not start with BMM's profile, make that
-symlink by doing the following:
+The startup folder is a symlink to a folder on central storage where
+BMM's profile is kept.  If |bsui| does not start with BMM's profile,
+make that symlink by doing the following:
 
 .. code-block:: sh
 

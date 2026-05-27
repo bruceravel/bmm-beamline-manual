@@ -412,17 +412,18 @@ about 300 |mu| m by 250 |mu| m.
 Acknowledgements
 ----------------
 
-Pride of place goes to the late Jimmy Biancarosa and to Don Abel, the
-excellent technicians who helped build BMM and outfit it with kit
-that works.  Truly nothing would have ever happened at BMM without them.
+Pride of place goes to the late Jimmy Biancarosa, Don Abel, and Matt
+Shaw, the excellent technicians who helped build BMM and outfit it
+with kit that works.  Truly nothing would have ever happened at BMM
+without them.
 
 BMM's `Bluesky <https://blueskyproject.io/>`__ profile was mostly
 written by Bruce.  But this would not have happened without the help
 of several members of NSLS-II's DSSI program.  In particular, I want
 to thank Dan Allan, Tom Caswell, Josh Lynch, Jakub Wlodek, Max
-Rakitin, Dmitri Gavrilov, Stuart Campbell, Abby Giles, Garrett Bishof,
-Nate Maytan, Matt Snyder, Oksana Ivashkevych, Ryan Jaskiel, AJ Sliger,
-and Jun Ma.  
+Rakitin, Roman Chermikov, AJ Sliger, Jun Ma, John Sinsheimer, Dmitri
+Gavrilov, Stuart Campbell, Abby Giles, Garrett Bishof, Nate Maytan,
+Matt Snyder, and Oksana Ivashkevych.
 
 Thanks to every BMM user |nd| being a BMM user means being a beta tester
 for the beamline software!
@@ -448,7 +449,7 @@ here)
 <https://github.com/marketplace/actions/sphinx-docs-to-github-pages>`__
 this document whenever a ``git push`` happens.  We are grateful to the
 `UIBCDF <https://github.com/uibcdf/action-sphinx-docs-to-gh-pages>`__
-developers for this continuous deployment capability.
+developers, whose continuous deployment tooling drives this document..
 
 
 
@@ -460,7 +461,7 @@ This document and `the BlueSky data collection profile
 <https://github.com/NSLS2/bmm-profile-collection>`__ it covers was
 developed primarily by a NIST employee. Pursuant to title 17 United
 States Code Section 105, works of NIST employees are not subject to
-copyright protection in the United States. Thus this repository may
+copyright protection in the United States.  Thus this repository may
 not be licensed under the same terms as Bluesky itself or its
 documentation.
 
