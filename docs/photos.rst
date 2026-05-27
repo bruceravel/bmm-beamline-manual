@@ -73,7 +73,7 @@ DM3 BCT Failure
 
 May 5, 2023: Failure of the DM3_BCT axis
 
-**Symptoms**: BCT could not be moved from CSS or bsui. Immediate encoder
+**Symptoms**: BCT could not be moved from CSS or |bsui|. Immediate encoder
 loss. No motion.
 
 After several times restarting the IOC and one power cycle of the

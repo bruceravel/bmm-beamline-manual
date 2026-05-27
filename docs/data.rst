@@ -314,7 +314,7 @@ To start, point your browser at https://vdi.nsls2.bnl.gov/.
 
 Either download the client app or use the browser.  The client
 performs better than the browser app, but does involved installation
-of the Monissa software on your computer.
+of the Omnissa software on your computer.
 
 .. _fig-omnissa_download:
 .. figure:: _images/datasec/omnissa_download.png
@@ -432,6 +432,9 @@ will be sent to your phone (the DUO push may happen silently ... if
 things appear to be hung, check your phone to see if a DUO push has
 arrived). 
 
+Reading Tiled records
+~~~~~~~~~~~~~~~~~~~~~
+
 At this point you have access to data from BMM.  To interact with the
 data, you will need scan UIDs.  For example:
 
@@ -481,7 +484,11 @@ You can find the UID of a scan by examining the header of an
 :numref:`XAS data file (see Section %s) <xdiexample>`.  Look for
 the line that starts ``# Scan.uid:``.
 
+Searching for data
+~~~~~~~~~~~~~~~~~~
+
 .. Admonition:: Searching
+   :class: todo
 
    #. Need an explanation of doing datetime searches to get data
       from a specific experiment.
@@ -491,8 +498,8 @@ the line that starts ``# Scan.uid:``.
 
 
 
-Accessing data via Jupyter
---------------------------
+Using Jupyter
+~~~~~~~~~~~~~
 
 .. todo:: Details needed
 

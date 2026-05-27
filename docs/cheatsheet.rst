@@ -54,7 +54,7 @@ Most common commands
 ``RE(mvr(xafs_y, <value>))``
   Move any named motor BY an amount (``xafs_y`` is an example) |harr| :numref:`Section %s <sample_stages>`
 
-``RE(change_edge('Xx'))``
+``RE(change_edge('Xx'))`` / ``RE(change_edge('Xx', focus=True))``
   setup beamline for an absorption edge, ``Xx`` = 1- or 2-letter symbol,
   e.g. ``Cu`` or ``Y``.  |harr| :numref:`Section %s <change_edge>`
 

@@ -30,8 +30,8 @@ requested.  The worker then parses event documents and adds data
 points to the real-time plots.
 
 In May 2024, data security upgrades were implemented at BMM.  The
-upshot of this new data security regime is that the |bsui| or qs process
-is not able to write data to the proposal directory on central
+upshot of this new data security regime is that the |bsui| or |qs|
+process is not able to write data to the proposal directory on central
 storage.  Moving all data file output from the |bsui| profile to a new
 Kafka worker gave us a path forward.  The workers can be run with
 adequate privilege to write to central storage.

@@ -665,7 +665,11 @@ drive letter, enter the following as the "Folder"
 
 .. code-block:: none
 
-   \\data3.nsls2.bnl.gov\bmm\proposals\2024-3\pass-316832
+   \\storage.bmm.nsls2.bnl.gov\
+
+From the mounted Z drive, you can navigate to
+``\proposals\<cycle>\pass-<GUP>``, replacing ``<cycle>`` and ``<GUP>``
+with the correct cycle number and proposal number for the experiment.
 
 Note that the backslashes are important.  Also substitute the correct
 cycle and proposal numbers.
@@ -688,7 +692,8 @@ but then the new entry will show up in the side bar.
 The new network drive can now be clicked into.
 
 Configure EC-lab to write its data files into the
-``assets\vsp300-1`` folder.
+``assets\vsp300-1`` folder.  The full path, then, is
+``Z:\proposals\<cycle>\pass-<GUP>\assets\vsp300-1``.
 
 Configure the Hiden software to write its data files into the
 ``assets\hpr20-1`` folder.

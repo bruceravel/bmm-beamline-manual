@@ -26,8 +26,22 @@ been alphebtized to make them a bit easier to find when reading this
 page.  This is basically an attempt to capture institutional knowledge
 ... someplace.
 
+All DNS names and IP addresses at 6BM are recorded at
+https://docs.nsls2.bnl.gov/docs/admin/network/beamline_ipaddresses.html#bm-bmm-ip-addresses
+
 Analog Video Capture
 --------------------
+
+.. admonition:: Deprecated
+   :class: note
+
+   This camera is still in place and displayed on the screen to the
+   left of the main control computer.  The REDGO dongle is still
+   plugged into xf06bm-ws3 and can be used to capture images.  But
+   images are no longer captured as part of the dossier as there is no
+   way to write those images to project folders and capture the
+   resource link in Tiled.  (May, 2026)
+
 
 Implementing `the REDGO Video Audio VHS VCR USB Video Capture Card to
 DVD Converter Capture Card Adapter
@@ -111,14 +125,7 @@ write to storage.
    configuration.  Thus xf06bm-ws3 should always have this udev rule
    available, even after a system upgrade or installation.
 
-.. admonition:: Update
-   :class: note
 
-   As of January 2026, this camera is no longer being captured as part
-   of the experimental metadata.  All of this infrastructure is in
-   place, so images *can* be captured.  They just aren't captured
-   automatically any more.  This decision was made for data security
-   and data management considerations.
 
 
 
@@ -161,7 +168,7 @@ for configuring things on the device.
 <https://www.moxa.com/doc/manual/nport/5200/NPort5200_v1.pdf>`__ --
 The small Moxa devices supplied by FMBO are in this series. 
 
-.. note:: The 5200 series is an end of life Moxa product.
+.. note:: The 5200 series is a discontinued Moxa product.
 
 Camera Configuration
 ~~~~~~~~~~~~~~~~~~~~
@@ -418,25 +425,25 @@ than instruments.
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
 |           |  4       |  06bm-agg 36       |  INST          |  xf06bm-em1         |  200238           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
-| **DM3-B** |  1       |  17                |  SCI/EPICS     |  xf06bm-ws5         |  200239           |
+| **DM3-B** |  1       |  unused            |                |                     |  200239           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
 |           |  2       |  18                |  SCI/EPICS     |  xf06bm-disp1       |  200240           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
-|           |  3       |  19                |  SCI/EPICS     |  xf06bm-xspress3    |  200241           |
+|           |  3       |  28                |  CAM           |  xf06bm-cam8        |  200241           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
-|           |  4       |                    |  SCI/EPICS     |                     |  200242           |
+|           |  4       |  27                |  CAM           |  xf06bm-cam8        |  200242           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
-| **DM3-C** |  1       |                    |                |                     |  200243           |
+| **DM3-C** |  1       |  37                |  INST          |  xf06bm-edxd1       |  200243           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
-|           |  2       |                    |                |                     |  200244           |
+|           |  2       |  06bm-agg 29       |  INST          |  xf06bm-hiden1      |  200244           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
-|           |  3       |                    |                |                     |  200245           |
+|           |  3       |  ??                |                |                     |  200245           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
-|           |  4       |                    |                |                     |  200246           |
+|           |  4       |  unused            |                |                     |  200246           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
-| **DM3-D** |  1       |                    |                |                     |  200247           |
+| **DM3-D** |  1       |  24                | CAM            |  xf06bm-cam7        |  200247           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
-|           |  2       |                    |                |  unused             |                   |
+|           |  2       |                    | SCI/EPICS      |  xf06bm-xspress3    |  200248           |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
 |           |  3       |                    |                |  unused             |                   |
 +-----------+----------+--------------------+----------------+---------------------+-------------------+
@@ -459,6 +466,37 @@ Some photos of the patch panel:
 
    (Left) CAT6 patch panel at DM3.  (Right) Lowest numbered label on
    the CAT6 cables in the DM3 patch panel
+
+
+.. _dm3-bct:
+
+DM3_BCT
+-------
+
+In early May, 2026, after a power failure, the motors on MC06 had to
+be rehomed.  ``dm3_bct``, the vertical stage for the slit assembly,
+failed in a very low position, but still some distance from the lower
+limit switch.
+
+The reason for the failure turned out to be that the encoder read
+strip had delaminated at the end relevant to the lower range of the
+stage (i.e. the top-most part of the read strip).  There is also a
+noticeable kink in the read strip about 2 cm from the end.
+
+After assisting the homing of the stage by manually pressing the lower
+limit switch to allow the homing sequence to complete, the problem was
+resolved by:
+
+1. Resecuring the faulty portion of the read strip to the metal frame
+   with some double sided tape.
+
+2. Raising the lower limit switch by about 40 mm.
+
+The lower limit switch was *very* low, far below the functional range
+of motion of the slit assembly, even in the low energy modes of the
+photon delivery system.  So, raising the limit switch should
+have no impact on operations.  Doing so will avoid having the encoder
+read head pass over the damaged part of the read strip.
 
 
 .. _eiger:
