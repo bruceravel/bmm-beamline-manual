@@ -597,10 +597,10 @@ the VM.
 Starting the virtual machine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+ At a command line, do ``rdesktop xf06bm-srv2 &``
-+ This will open a new window and display a Windows login
-  screen. Normal BNL credentials do not work. Log in as user
-  ``xf06bm`` using the password known by beamline staff.
++ At a command line, do ``xfreerdp /v:xf06bm-srv2 /u:xf06bm /size:75%wh``
++ You will be prompted for a password.  Normal BNL credentials do not
+  work. Log in using the password known by beamline staff.
++ This will open a new window and display a Windows desktop. 
 + The Windows desktop might start with a full-screen management
   application that looks like the figure below. You can close
   or minimize that window.
