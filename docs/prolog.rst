@@ -59,6 +59,7 @@
 
 .. |bsui| replace:: :bolditalic:`bsui`
 .. |qs| replace:: :bolditalic:`queueserver`
+.. |qm| replace:: :bolditalic:`queuemonitor`
 
 .. role:: smallcaps
   :class: smallcaps
