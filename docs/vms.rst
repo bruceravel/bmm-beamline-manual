@@ -96,17 +96,18 @@ axis-caproto-6   XAS webcam controller
 cam01            DM1 beam diagnostic
 cam02            DM2 beam diagnostic
 cam03            DM3 beam diagnostic
-cam04            ???
-cam07            unused prosilica
+cam04            unused prosilica
+cam07            
 cam08            Mako gigE camera (XAS end station)
+cam09            Mako gigE camera (XAS end station)
 =============== =======================================================
 
 
 .. admonition:: Future Tech!
 
-   cam9 - cam11 to replace USB cameras at both end stations
+   cam10 - cam11 to replace USB cameras at xrd end stations
 
-   cam07 will be used with the direct beam sensor for goniometer
+   cam04 may be used with the direct beam sensor for goniometer
    alignment once that item is procured
 
 .. note:: The ``logitechF710`` IOC continues to run on ``xf06bm-ioc2``

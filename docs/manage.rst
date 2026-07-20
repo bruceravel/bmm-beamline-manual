@@ -927,3 +927,164 @@ Also set is the Redis parameter ``BMM:xspress3``, which is set to 1,
 .. code-block:: python
 
    n_elements = int(rkvs.get('BMM:xspress3'))
+
+Dealing with Guacamole
+----------------------
+
+
+On xf06bm-ws3, do
+
+.. code-block:: bash
+
+   dzdo systemctl restart x11vnc@0 x11vnc@1 x11vnc@2 x11vnc@3 x11vnc-all xrdp
+
+
+Granting and restricting access to the beamline machines via guacamole
+is done using the `Science Network User Tools <https://docs.nsls2.bnl.gov/docs/explanations/tools/remote/N2SNUserTools.html#listing-users-who-can-login-to-instruments>`__.
+
++ List users: ``n2sn_list_users``
++ Search users: ``n2sn_search_users --surname <name>``
++ Add users: ``n2sn_add_user -l <username> USER,GUACCTRL``
+
+See the link above for complete details.
+
+
+
+Dealing with Queueserver
+------------------------
+
+Server side
+~~~~~~~~~~~
+
+The |qs| runs on the virtual machine at
+``xf06bm-bmm-qs1.nsls2.bnl.gov``.  When ssh-ing to that machine from
+the beamline subnet, you must use the fully qualified path.  You
+should ssh as yourself, not as the beamline operator, i.e.
+
+.. code-block:: bash
+
+   ssh bravel@xf06bm-bmm-qs1.nsls2.bnl.gov
+
+substituting your username for Bruce's, of course.
+
+Once there, you can check the status of a server instance with
+
+.. code-block:: bash
+
+   dzdo systemctl status bluesky-queueserve
+
+
+You can start a stopped server instance with
+
+.. code-block:: bash
+
+   dzdo systemctl start bluesky-queueserve
+
+If you need to change something about the |qs| configuration, for
+example, the list of available plan names in
+``existing_plans_and_devices.yaml``: 
+
+.. code-block:: bash
+
+   dzdo systemctl restart bluesky-queueserve
+
+Once the |qs| is running, you can attached a |qm| or interact wiuth
+the queue in any other way.
+
+
+Client side
+~~~~~~~~~~~
+
+The machine operator account, ``xf06bm``, on all the workstations has
+a folder at ``~/queueserver``.  In that location do
+
+.. code-block:: bash
+
+   pixi run qm
+
+This will fire up the |qm| on that workstation.
+
+.. _fig-qm_startup:
+.. figure:: _images/qs/qm_startup.png
+   :target: _images/qm_startup.png
+   :width: 70%
+   :align: center
+
+   The |qm| at startup.
+
+Clicking the :key:`Connect` button in the upper left will connect
+the monitor to the configured instance of the |qs|.
+
+.. subfigure::  AB
+   :layout-sm: AB
+   :gap: 8px
+   :subcaptions: above
+   :name: fig-qm_connected
+   :class-grid: outline
+
+   .. image:: _images/qs/qm_connected.png
+
+   .. image:: _images/qs/qm_connected2.png
+
+   (Left) Connected to the |qs|, monitor tab.  (Right) connected to
+   the |qs|, edit and control tab.
+
+
+Next, click the :key:`Open` buton on the top left of the edit and
+control tab.  This will begin loading the bluesky profile.
+
+
+.. subfigure::  AB
+   :layout-sm: AB
+   :gap: 8px
+   :subcaptions: above
+   :name: fig-qm_env
+   :class-grid: outline
+
+   .. image:: _images/qs/qm_env_start.png
+
+   .. image:: _images/qs/qm_env_open.png
+
+   (Left) Opening the bluesky environment tab.  Note that the same
+   screen messages as we see in |bsui| are being written to the
+   console on the monitor tab.  (Right) Ready to begin work.  Note the
+   messages at the top of the edit and control tab indicate that the
+   environment is open, but idle.
+
+
+To open communications with the |qs|, you need to established an
+authenticated connection via https.  Assuming you know an
+authentication key, this bit of code will open the connection and
+demonstrate connectivity via the ``ping`` method.
+
+.. code-block:: python
+
+   from bluesky_queueserver_api import BPlan
+   from bluesky_queueserver_api.http import REManagerAPI
+
+   qs = REManagerAPI(http_server_uri="https://xf06bm-bmm-qs1.nsls2.bnl.gov:443")
+   with open("/path/to/authentication_key", "r") as f:
+	api_key = f.read().strip()
+   qs.set_authorization_key(api_key=api_key)
+   qs.ping()
+
+With an established connection, plans can be pushed to the queue.  In
+this example, the plan name is ``CMS_driven_measurement`` followed by
+three arguments of the plan.
+
+.. code-block:: python
+
+   plan = BPlan('CMS_driven_measurement', composition, distance, time)
+   qs.item_add(plan, pos=priority)
+
+Here is an example of moving a motor by 10 mm at BMM:
+
+.. code-block:: python
+
+   plan = BPlan('mover', 'xafs_x', 10)
+   qs.item_add(plan, pos=priority)
+
+
+The ``pos`` argument to the ``item_add`` method takes either
+``"front"`` or ``"back"`` and refers to the position in the queue to
+which the plan will be pushed.
