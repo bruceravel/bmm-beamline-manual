@@ -231,7 +231,7 @@ When the linescan finishes, a *stop* message is issued:
 
    {'linescan': 'end',}
 
-This replicates very closely how the BlueSky `LivePlot
+This replicates rather closely how the BlueSky `LivePlot
 <https://blueskyproject.io/bluesky/callbacks.html#liveplot-for-scalar-data>`__
 displays data of this sort.
 

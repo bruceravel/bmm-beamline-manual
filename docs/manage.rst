@@ -931,12 +931,63 @@ Also set is the Redis parameter ``BMM:xspress3``, which is set to 1,
 Dealing with Guacamole
 ----------------------
 
+To connect to a beamline computer via Guacamole, point a web browser
+at https://remote.nsls2.bnl.gov. Authenticate with username, password,
+and DUO.  From the menu of options, select "BMM (06-BM)".  The main
+workstation for XAS experiments is "BMM Workstation 3".  Then select
+the display you want to look at.
 
-On xf06bm-ws3, do
+.. _fig-quac_options:
+.. figure:: _images/software/guac_options.png
+   :target: _images/guac_options.png
+   :width: 50%
+   :align: center
+
+   The Guacamole options menu
+
+
+The displays are numbered by this diagram showing the layout of the
+monitors at the beamline.  The |bsui| terminal window is usually on
+Display 1.  The web browser and spreadsheet are usually on Display 3.
+
+.. code-block:: text
+
+               +---------------+
+	       |               |
+	       |   Display 2   |
+	       |               |
+               +---------------+
+    +---------------+      +---------------+
+    |               |      |               |
+    |   Display 1   |      |   Display 3   |
+    |               |      |               |
+    +---------------+      +---------------+
+
+
+If you are BMM user and do not see the menu of options in
+:numref:`Figure %s <fig-quac_options>`, ask BMM staff to grant access.
+
+
+The main workstation for scattering experiments is workstation 2,
+which has four displays in a 2x2 grid.
+
+
+The Guacamole server
+~~~~~~~~~~~~~~~~~~~~
+
+If Guacamole is unresponsive when connecting to the URL above, try
+restarting the server.  On xf06bm-ws3, do
 
 .. code-block:: bash
 
    dzdo systemctl restart x11vnc@0 x11vnc@1 x11vnc@2 x11vnc@3 x11vnc-all xrdp
+
+This requires authentication with username, password, and DUO.  This
+restart can only be done by beamline or DSSI staff.
+
+This is also sometimes necessary after a reboot when Guacamole has
+connected with the workstation, but is showing a strange view of the
+monitors in the three displays.
 
 
 Granting and restricting access to the beamline machines via guacamole
@@ -945,6 +996,8 @@ is done using the `Science Network User Tools <https://docs.nsls2.bnl.gov/docs/e
 + List users: ``n2sn_list_users``
 + Search users: ``n2sn_search_users --surname <name>``
 + Add users: ``n2sn_add_user -l <username> USER,GUACCTRL``
+
+``n2sn_add_user`` can only be run by BMM or DSSI staff.
 
 See the link above for complete details.
 
@@ -955,6 +1008,8 @@ Dealing with Queueserver
 
 Server side
 ~~~~~~~~~~~
+
+.. note:: Working on the server requires BMM or DSSI staff.
 
 The |qs| runs on the virtual machine at
 ``xf06bm-bmm-qs1.nsls2.bnl.gov``.  When ssh-ing to that machine from
@@ -994,6 +1049,9 @@ the queue in any other way.
 
 Client side
 ~~~~~~~~~~~
+
+.. note:: The |qm| should be run as the beamline user, ``xf06bm``.
+
 
 The machine operator account, ``xf06bm``, on all the workstations has
 a folder at ``~/queueserver``.  In that location do
