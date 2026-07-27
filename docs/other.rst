@@ -14,6 +14,10 @@
 Other measurement needs
 =======================
 
+See :numref:`Section %s <iocs>` for details about the IOCs running the
+beamline instrumentation.
+
+
 SEAD
 ----
 

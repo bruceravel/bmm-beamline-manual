@@ -54,6 +54,11 @@ the |bsui| command line.  Here is an example:
    ==============================================================================
 
 
+See :numref:`Section %s <iocs>` for details about the IOCs running the
+beamline instrumentation.
+
+
+
 .. _sample_stages:
 
 Sample stages
@@ -73,26 +78,25 @@ These stages sit on top of the XAFS optical table.
    =============== ===========  =========  =======================  =====================================
    ``xafs_x``      linear       mm         main sample stage        |plus| outboard, - inboard
    ``xafs_y``      linear       mm         main sample stage        |plus| up, - down
-   ``xafs_detx``   linear       mm         detector mount           |plus| away from sample, - closer
-   ``xafs_dety``   linear       mm         detector mount           |plus| uo, - down
-   ``xafs_detz``   linear       mm         detector mount           |plus| downstream, - upstream
    ``xafs_wheel``  rotary       degrees    *ex situ* sample wheel   |plus| clockwise, - |widdershins|
-   ``xafs_linxs``  linear       mm         ref wheel vertical       |plus| up, - down
+   ``xafs_detx``   linear       mm         detector mount           |plus| away from sample, - closer
+   ``xafs_dety``   linear       mm         detector mount           |plus| up, - down
+   ``xafs_detz``   linear       mm         detector mount           |plus| downstream, - upstream
    ``xafs_ref``    rotary       degrees    reference stage          |plus| clockwise, - |widdershins|
-   ``xafs_refx``   linear       mm         reference stage          |plus| outboard, - inboard
-   ``xafs_refy``   linear       mm         reference stage          |plus| up, - down
+   ``xafs_refx``   linear       mm         reference X stage        |plus| outboard, - inboard
+   ``xafs_refy``   linear       mm         reference Y stage        |plus| up, - down
    ``xafs_pitch``  tilt         degrees    Huber tilt stage         |plus| more positive
    ``xafs_roll``   tilt         degrees    Huber tilt stage         |plus| more positive
    ``xafs_rots``   rotary       degrees    small rotary stage       |plus| clockwise, - |widdershins|
    ``xafs_garot``  rotary       degrees    g.a. rotary stage        |plus| clockwise, - |widdershins|
-   ``xafs_yu``     linear       mm         u.s table jack           |plus| up, - down
-   ``xafs_ydo``    linear       mm         d.s o.b. table jack      |plus| up, - down
-   ``xafs_ydi``    linear       mm         d.s i.b. table jack      |plus| up, - down
    ``xafs_spare``  linear       mm         spare linear stage       
    ``xafs_bsx``    linear       mm         beam stop stage          |plus| outboard, - inboard
    ``xafs_bsy``    linear       mm         beam stop stage          |plus| up, - down
-   ``xafs_eigerx`` linear       mm         area detector stage      |plus| outboard, - inboard
-   ``xafs_eigery`` linear       mm         area detector stage      |plus| up, - down
+   ``xafs_adx``    linear       mm         area detector stage      |plus| outboard, - inboard
+   ``xafs_ady``    linear       mm         area detector stage      |plus| up, - down
+   ``xafs_yu``     linear       mm         u.s. table jack          |plus| up, - down
+   ``xafs_ydo``    linear       mm         d.s. o.b. table jack     |plus| up, - down
+   ``xafs_ydi``    linear       mm         d.s. i.b. table jack     |plus| up, - down
    =============== ===========  =========  =======================  =====================================
 
 g.a. = glancing angle |blackcircle|
@@ -100,6 +104,10 @@ o.b. = outboard  |blackcircle|
 i.b. = inboard  |blackcircle|
 u.s. = upstream  |blackcircle|
 d.s. = downstream
+
+Note that the ``xafs_pitch`` stage is not right handed in the beamline
+coordinate system.  This is the more intuitive setting for how that
+stage is typically used.
 
 ----
 
@@ -186,7 +194,7 @@ Here are some photos identifying these axes:
 
    .. image:: _images/stages/detector_mounts.jpg
 
-   (Left) The area detector stages: ``xafs_bsx`` and ``xafs_bsy``.
+   (Left) The area detector stages: ``xafs_adx`` and ``xafs_ady``.
    (Right) Mounting rigs for the Eiger and Pilatus detectors.
 
 
@@ -254,11 +262,11 @@ are the same for all sample stage motors.
 
 **Reference wheel** 
    :numref:`The reference stage (Section %s) <foilholder>` is a
-   rotation stage with a sample wheel holding up to 48 reference
-   foils.  It is calibrated such that the beam passes through the
-   center of a slot every 15 degrees.  The slots are indexed such that
-   they can be accessed by the symbol of the element being measured.
-   To move to a new reference foil::
+   rotation stage with a sample wheel holding up to 48 reference foils
+   or stable oxides.  It is calibrated such that the beam passes
+   through the center of a slot every 15 degrees.  The slots are
+   indexed such that they can be accessed by the symbol of the element
+   being measured.  To move to a new reference foil::
 
      RE(reference('Fe'))
 
@@ -465,7 +473,7 @@ fluorescence.
 For very flat samples which are square or circular and about 5mm
 across or larger, this alignment algorithm is very robust.  For oddly
 shaped samples, verify that the automation works before relying upon
-it.  Otherwise, simply do the alignment by hand.
+it.  Otherwise, you will need to do the alignment by hand.
 
 Table motors
 ------------
@@ -484,16 +492,16 @@ The lateral table motors |nd| and its yaw |nd| are normally disabled.
    :name:  xafs-table
    :align: left
 
-   ==============   ========  =================================
-   motor            units     notes
-   ==============   ========  =================================
-   xafs_yu          mm        upstream table jack
-   xafs_ydi         mm        downstream, inboard table jack
-   xafs_ydo         mm        downstream, outboard table jack
-   xafs_vertical    mm        coordinated linear motion
-   xafs_pitch       degrees   coordinated table pitch
-   xafs_roll        degrees   coordinated table roll
-   ==============   ========  =================================
+   ===================  ========  =================================
+   motor                units     notes
+   ===================  ========  =================================
+   xafs_yu              mm        upstream table jack
+   xafs_ydi             mm        downstream, inboard table jack
+   xafs_ydo             mm        downstream, outboard table jack
+   xafs_table.vertical  mm        coordinated linear motion
+   xafs_table.pitch     degrees   coordinated table pitch
+   xafs_table.roll      degrees   coordinated table roll
+   ===================  ========  =================================
 
 
 **Querying table position**
@@ -517,7 +525,7 @@ The lateral table motors |nd| and its yaw |nd| are normally disabled.
    e.g.::
 
       RE(mvr(xafs_ydi, 3))
-      RE(mv(xafs_vertical, 107))
+      RE(mv(xafs_table.vertical, 107))
 
    Again, this is rarely necessary.  The mode changing plan should
    leave the table in the correct location for your experiment.

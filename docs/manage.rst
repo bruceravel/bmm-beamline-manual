@@ -8,7 +8,7 @@
    See the LICENSE file for details.
 
 .. role:: key
-    :class: key
+   :class: key
 
 
 .. _manage:
@@ -17,9 +17,11 @@ Managing the beamline
 =====================
 
 
-In this section, some recipes are provided for managing the beamline
-and meeting the needs and expectations of different experiments.
+In this section, some high-level concepts of operations at BMM are
+explained.
 
+See :numref:`Section %s <iocs>` for details about the IOCs running the
+beamline instrumentation.
 
 
 .. _start_end:
@@ -27,18 +29,32 @@ and meeting the needs and expectations of different experiments.
 Starting and ending an experiment
 ---------------------------------
 
-When a new experiment begins, run the command::
+When a new experiment begins, run this command::
 
-  BMMuser.begin_experiment(name='Betty Cooper', date='2019-02-29', gup=123456, saf=654321)
+  BMMuser.begin_experiment(name='Betty Cooper', date='2026-02-29', gup=123456, saf=654321)
 
-This will create that data folder and populate it with an
-:numref:`experimental log (Section %s) <log>`, write a template for a
-:numref:`macro file (Section %s) <macro>`, configure the logger to
-write a :numref:`user log file (Section %s) <logfile>` for this
-experiment, set the GUP and SAF numbers as metadata for output files,
-set up :numref:`snapshot (Section %s) <snap>` and :numref:`dossier
-(Section %s) <dossier>` folders, and perform other experiment start-up
-chores.
+This will:
+
+1. Identify the correct proposal folder,
+   i.e. ``/nsls2/data/bmm/proposals/<cycle>/pass-123456`` 
+2. Make a local working folder |nd| ``~/Workspace/Visitors/Betty
+   Cooper/2026-02-29`` |nd| and populate it with templates for
+   :numref:`automation spreadsheets (Section %s) <automation>` and
+   example :numref:`INI files (Section %s) <ini>`.
+3. Configure detectors and cameras to use the assets folders in the
+   proposal folder.
+4. Run the ``sync_experiment()`` command, identifying the user in the
+   run engine's metadata dictionary.
+5. Configures the bot that writes Slack messages to use the channels
+   for this proposal.  Writes a message to the proposal Slack channel
+   explaining how to access data and subscribes the NSLS2 Operations
+   Monitor to the Slack channel for beamline messages.
+6. Sets the proposal number and safety approval form number as
+   common metadata for all measurements.  Fetches the names of all
+   experimenters on the proposal and sets that as common metadata.
+7. Sets the |bsui| command line prompt to it's green-text state,
+   indicating that an experiment is active.
+
 
 The ``name`` should be the PI's full name, preferably transliterated
 into normal ASCII.  The ``date`` should be the starting day of the
@@ -49,15 +65,15 @@ Once the experiment is finished, run this command::
 
   BMMuser.end_experiment()
 
-This will reset the logger and the ``BMMuser.folder`` variable and
-unset the GUP and SAF numbers.
-
+This will undo all the above and set the |bsui| prompt to its red-text
+state, indicating that no experiment is active.
 
 
 Change energy
 -------------
 
-Changing energy is simple.  Usually, it is as simple as doing
+Changing energy is simple.  Usually, it is :numref:`as simple as doing
+(Section %s) <change_edge>`
 
 .. code-block:: python
 		
@@ -118,17 +134,22 @@ If you want to reproduce this by hand, here is the command sequence:
 
       RE(mv(m2_bender, 212000))
 
-#. Next, verify that the :numref:`height of the hutch slits (Sec %s)
-   <special-linescans>` is optimized for the beam height.  In
-   principle, this should be correct after changing photon delivery
-   system mode.  But it doesn't hurt to verify.
+#. Next, verify that the pitch of the final mirror is optimized to
+   deliver the brightest part of the beam into the :numref:`end
+   station slits (Section %s) <slits3>`.  In principle, this should be
+   very close after changing photon delivery system mode.  But it
+   doesn't hurt to verify.
 
    .. code-block:: python
 
-      RE(slit_height())
+      RE(mirror_pitch(mirror='m3'))
 
-   At the end of the scan, you will need to pluck the correct position
+   At the end of the scan, you will need to pluck the peak position
    from the plot.
+
+   The scanned mirror should be M3 for all :numref:`photon delivery
+   modes (Table %s) <pds_modes>` except for Mode A, in
+   which case you should scan M2.
 
 #. Next, if you are using a reference foil, you should move the
    reference foil holder to the slot containing the correct foil.  The
@@ -246,7 +267,7 @@ To do all of that by hand, you would do the follow commands:
    RE(change_mode('XRD'))
    RE(mv(dcm.energy, 8600))
    RE(rocking_curve())
-   RE(slit_height())
+   RE(mirror_pitch(mirror='m2'))
 
 This change of mode should have the beam in good focus at the position
 of the goniometer.  8600 eV is the nominal operating energy for the
@@ -271,6 +292,10 @@ or
 
 while observing the beam on the camera.
 
+
+.. todo:: Work with DSSI BLOP team to optimize DCM roll and M2 yaw &
+	  lateral for all energies above 8000 eV at the XRD end
+	  station.
 
 .. todo:: Determine look-up table for lower energy operations using
 	  both M2 and M3.  This will require a new XAFS table and
@@ -824,80 +849,6 @@ The mono should now be correctly calibrated using the new calibration
 parameters.
 
 
-Provision a new beamline computer
----------------------------------
-
-This is a list of notes on how to finish the provisioning of a new
-beamline computer.
-
-Firstly, make sure that ``/nsls2/data`` is a symlink to
-``/nsls2/data3``.  If it is not, ask for help from DSSI.
-
-
-install additional packages
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+ plasma-desktop (just ... better)
-+ redis (essential for operation of |bsui|)
-+ most (used as the pager in BMM's |bsui| profile)
-+ ag (powerful ack-like grep alternative)
-+ fswebcam (used to capture analog pinhole camera)
-+ demeter and perl-Graphics-GnuplotIF (something silly, no doubt)
-+ slack (communications)
-+ ark (compression, useful in file manager)
-
-
-To install these, do:
-
-.. code-block:: sh
-
-   dzdo dnf install redis most ag fswebcam demeter perl-Graphics-GnuplotIF slack ark
-   dzdo dnf install --skip-broken --nobest @kde-desktop
-
-The second command installs the KDE metapackage, skipping missing
-packages. 
-
-To finish installing ``sddm``, do 
-
-.. code-block:: sh
-
-   dzdo systemctl stop gdm
-   dzdo systemctl start sddm
-
-Desktop wallpaper
-~~~~~~~~~~~~~~~~~
-
-This may not be provisioned correctly out of the box.  Find the
-beamline wallpapers in ``/usr/share/nsls2/wallpapers/beamlines``. 
-
-Right click on the desktop and select "Configure Desktop and
-Wallpaper".  Click on "Add Image" and navigate to the folder above.
-
-Things to install from git
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+ BMM stuff: ``git clone git@github.com:NSLS-II-BMM/BMM-beamline-configuration.git``
-  + then, ``cd ~/bin`` and ``ln -s ~/git/BMM-beamline-configuration/tools/run-cadashboard``
-+ BMM user manual: ``git clone git@github.com:NSLS2/bmm-beamline-manual.git``
-+ BMM standards: ``git clone git@github.com:NSLS2/bmm-standards.git``
-+ Switch visualization: ``git clone git@github.com:NSLS-II-BMM/switch-pretty-printer.git``
-
-Also do ``cd ~/bin`` and ``ln -s ~/.ipython/profile_collection/startup/consumer/run-consumer``
-
-Workspace folders
-~~~~~~~~~~~~~~~~~
-
-Make the local data collection folders.  The
-:numref:`BMMuser.begin_experiment() command (Section %s) <start_end>`
-will make symlinks under those folders to the correct place on central
-storage.
-
-.. code-block:: text
-
-   mkdir ~/Workspace
-   mkdir ~/Workspace/Visitors
-   mkdir ~/Workspace/Staff
-
 
 
 Manage Silicon Drift Detectors
@@ -928,8 +879,8 @@ Also set is the Redis parameter ``BMM:xspress3``, which is set to 1,
 
    n_elements = int(rkvs.get('BMM:xspress3'))
 
-Dealing with Guacamole
-----------------------
+Using Guacamole
+---------------
 
 To connect to a beamline computer via Guacamole, point a web browser
 at https://remote.nsls2.bnl.gov. Authenticate with username, password,
@@ -980,7 +931,14 @@ restarting the server.  On xf06bm-ws3, do
 
 .. code-block:: bash
 
+   dzdo systemctl restart x11vnc@0 x11vnc@1 x11vnc@2 x11vnc-all xrdp
+
+On xf06bm-ws2, do
+
+.. code-block:: bash
+
    dzdo systemctl restart x11vnc@0 x11vnc@1 x11vnc@2 x11vnc@3 x11vnc-all xrdp
+
 
 This requires authentication with username, password, and DUO.  This
 restart can only be done by beamline or DSSI staff.
@@ -1003,8 +961,8 @@ See the link above for complete details.
 
 
 
-Dealing with Queueserver
-------------------------
+Using Queueserver
+-----------------
 
 Server side
 ~~~~~~~~~~~

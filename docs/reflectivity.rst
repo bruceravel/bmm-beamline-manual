@@ -49,7 +49,7 @@ instrumentation configuration:
 .. attention:: :numref:`Figure %s <fig-refl_setup>` was a setup during
    the 2025-3 cycle.  That was prior to the new ``xafs_y`` and
    ``xafs_y`` stages and the repurposing of the old stages as
-   ``xafs_eigerx`` and ``xafs_eiger_y``
+   ``xafs_adx`` and ``xafs_ady``
 
 
 Translatable It Chamber
@@ -72,6 +72,19 @@ line.  It is way too easy to get something in that bundle to catch on
 the edge of the table or some other obstruction.  In :numref:`Figure
 %s <fig-refl_it>`, a piece of X-rail has been secured to the table to
 provide support for the cables.
+
+
+.. admonition:: Future Tech!
+
+   Set in and out positions as attributes of the ``refl`` object.
+   Current using values set in ``BMM_configuration.ini``.
+
+
+.. code-block:: python
+
+   RE(it_in())
+   RE(it_out())
+
 
 
 .. subfigure::  AB
@@ -103,7 +116,7 @@ Put a phosphor screen somewhere below the detector.  Put the beam on
 that screen.
 
 Raise ``xafs_bsy`` until it just obstructs that beam.  Lower
-``xafs_eigery`` into the beam and use the area detector to fine-tune
+``xafs_ady`` into the beam and use the area detector to fine-tune
 the position of the beam stop.
 
 Set limits as needed on ``xafs_bsx`` and ``xafs_bsy``
@@ -112,7 +125,7 @@ Set limits as needed on ``xafs_bsx`` and ``xafs_bsy``
 Mounting the Pilatus 100k
 -------------------------
 
-Use ``xafs_eigerx`` and ``xafs_eigery``.  Use the L-bracket labeld as
+Use ``xafs_adx`` and ``xafs_ady``.  Use the L-bracket labeld as
 being for the Pilatus.
 
 See :numref:`Section %s <pilatus>` for instructions on getting the

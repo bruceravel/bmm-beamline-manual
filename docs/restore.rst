@@ -53,20 +53,13 @@ Once that IOC restarts, try again to set
 Redis
 -----
 
-Operations at BMM require that a redis server is running on
-xf06bm-ioc2. For whatever reason, the redis server never starts
-correctly after a reboot.  
+.. note::
 
-This will become apparent when |bsui| and cadashboard fail to start,
-complaining about ``Connection refused`` with ``xf06bm-ioc2:6379``.
-6379 is the port that redis uses for communication.
+   Now using redis service at ``xf06bm-bmm-redis1.nsls2.bnl.gov``
 
-To fix this, ssh to xf06bm-ioc2 as yourself (not the
-user account) and do this command:
+   Will need to solicit help from DSSI if that VM does not come back
+   to life after a power failure.
 
-.. code-block:: bash
-
-		dzdo systemctl restart redis
 
 
 Xspress3
@@ -93,18 +86,18 @@ when trying to connect to instruments.  For example, this:
    TimeoutError: XF:06BM-ES:{LINKAM}:MODEL could not connect within 10.0-second timeout.
 
 indicates that the Linkam controller is powered off and/or the
-linkam3 IOC is not running.  After verifying power to the instrument,
-ssh to xf06bm-ioc2 and do:
+``linkam3_socat`` IOC is not running.  After verifying power to the
+instrument, ssh to ``xf06bm-inst-ioc1`` and do:
 
 .. code-block:: bash
 
-		dzdo manage-iocs restart linkam3
+   dzdo manage-iocs restart linkam3_socat
 
 To get a list of all IOCs and their status, do:
 
 .. code-block:: bash
 
-		manage-iocs status
+   manage-iocs status
 
 Find the name of the relevant IOC and restart it using the
 ``manage-iocs rastart`` command.
@@ -116,81 +109,93 @@ on:
 
    dzdo manage-iocs report
 
+.. _iocs:
 
-IOCs on xf06bm-ioc2
-~~~~~~~~~~~~~~~~~~~
+IOCs at BMM
+-----------
 
-``xf06bm-ioc2`` is the main IOC server at BMM.  It is a much beefier
-machine than ``xf06bm-ioc1``.
+IOCs are mostly run from the virtual machines: ``xf06bm-inst-ioc1``,
+``xf06bm-det-ioc1``, ``xf06bm-cam-ioc1``.
 
-Here is a list of all the IOCs on ``xf06bm-ioc2`` and what they do:
+Previously ``xf06bm-ioc2`` was the main IOC server at BMM.  It is a
+much beefier machine than ``xf06bm-ioc1``.
 
-================  =================================================
-IOC name           purpose
-================  =================================================
- axis-caproto5     XRD Axis web camera
- axis-caproto6     XAS Axis web camera
- cam01             Prosilica camera #1 (DM1)
- cam02             Prosilica camera #1 (DM2)
- cam03             Prosilica camera #3 (DM3)
- cam04             :silver:`??`
- cam07             :silver:`??`
- cas-switch        enables channel access security management
- dante             Dante controller for Ge detector
- diode             DIODE controller (filters, spinner stage)
- EigerTest1        :silver:`placeholder`
- F460              FMBO current monitor (not in use)
- flag1             Front end flag (not in use)
- I400              FMBO electrometer (not in use)
- lakeshore331      LakeShore temperature controller (Displex)
- linkam3           Linkam controller
- logitechF710      Game controllers
- MC01              Collimating mirror
- MC02              Monochromator
- MC03              Slits2
- MC04              Focusing mirror
- MC05              Harmonic rejection mirror and DM1 filters
- MC06              DM3 diagnostics and slits3
- MC07              xafs_* motors
- MC08              xafs_* motors
- MC11              goniometer motors
- MC12              goniometer motors
- MC13              goniometer motors
- mythen1k          Mythen (not in use. Nonfunctional, according to Oksana)
+Here is a list of all the IOCs at BMM, what they do, and where they
+are running.  The color coding has no meaning other that to make it
+easier to see which IOCs run on the same server.
+
+================  ================================================= ==========================
+IOC name           purpose                                           location
+================  ================================================= ==========================
+ axis-caproto5     XRD Axis web camera                               :blue:`xf06bm-cam-ioc1`
+ axis-caproto6     XAS Axis web camera                               :blue:`xf06bm-cam-ioc1`
+ cam01             Prosilica camera #1 (DM1)                         :blue:`xf06bm-cam-ioc1`
+ cam02             Prosilica camera #1 (DM2)                         :blue:`xf06bm-cam-ioc1`
+ cam03             Prosilica camera #3 (DM3)                         :blue:`xf06bm-cam-ioc1`
+ cam04             Prosilica                                         :blue:`xf06bm-cam-ioc1`
+ cam08             Mako GigE                                         :blue:`xf06bm-cam-ioc1`
+ cam09             Mako GigE                                         :blue:`xf06bm-cam-ioc1`
+ cas-switch        channel access security management                xf06bm-inst-ioc1
+ dante             Dante controller for Ge detector                  :green:`xf06bm-det-ioc1`
+ diode             DIODE controller (filters, spinner stage)         xf06bm-inst-ioc1
+ eiger-det1        Eiger 4M                                          :green:`xf06bm-det-ioc1`
+ F460              FMBO current monitor (not in use)                 xf06bm-inst-ioc1
+ flag1             Front end flag (not in use)                       xf06bm-inst-ioc1
+ I400              FMBO electrometer (not in use)                    xf06bm-inst-ioc1
+ lakeshore331      LakeShore temperature controller (Displex)        xf06bm-inst-ioc1
+ linkam3_scoat     Linkam controller                                 xf06bm-inst-ioc1
+ logitechF710      Game controllers                                  :red:`xf06bm-ioc1`
+ MC01              Collimating mirror                                xf06bm-inst-ioc1
+ MC02              Monochromator                                     xf06bm-inst-ioc1
+ MC03              Slits2                                            xf06bm-inst-ioc1
+ MC04              Focusing mirror                                   xf06bm-inst-ioc1
+ MC05              Harmonic rejection mirror and DM1 filters         xf06bm-inst-ioc1
+ MC06              DM3 diagnostics and slits3                        xf06bm-inst-ioc1
+ MC07              xafs_* motors                                     xf06bm-inst-ioc1
+ MC08              xafs_* motors                                     xf06bm-inst-ioc1
+ MC09              xafs_* motors                                     :red:`xf06bm-ioc2`
+ MC11              goniometer motors                                 xf06bm-inst-ioc1
+ MC12              goniometer motors                                 xf06bm-inst-ioc1
+ MC13              goniometer motors                                 xf06bm-inst-ioc1
+ mythen-det2       Mythen                                            :green:`xf06bm-det-ioc1`
  omega_i_series    ??
- onewire           1Wire temerature sensors near mono
- piE625-M2         M2 piezo controller
- piE625-M3         M3 piezo controller
- piE625-mono       mono piezo controller
- plc1              PLC IOC
+ onewire           1Wire temperature sensors near mono               xf06bm-inst-ioc1
+ piE625-M2         M2 piezo controller                               xf06bm-inst-ioc1
+ piE625-M3         M3 piezo controller                               xf06bm-inst-ioc1
+ piE625-mono       mono piezo controller                             xf06bm-inst-ioc1
+ Pilatus100K       Pilatus using NFS mounts                          :red:`xf06bm-ioc1`
+ plc1              PLC IOC                                           xf06bm-inst-ioc1
  pscdrv            ??
- quadEM-1          QuadEM box 1
- quadEM-2          QuadEm box 2
- recsyncIOC        ??
- simDetector       ??
- va-1              Vacuum controllers and gauges
- xf06bmAlarmIOC    Alarm server
- xs3-8ch           :silver:`deprecated XSpress3 server, do not run`
- xs3-7-1           XSpress3 server for use with 7-element detector
- xs3-4-1           XSpress3 server for use with 4-element detector
-================  =================================================
+ quadEM-1          QuadEM box 1                                      xf06bm-inst-ioc1
+ quadEM-2          QuadEm box 2                                      xf06bm-inst-ioc1
+ recsyncIOC        ??                                                xf06bm-inst-ioc1
+ simDetector       ??                                                :green:`xf06bm-det-ioc1`
+ va-1              Vacuum controllers and gauges                     xf06bm-inst-ioc1
+ xf06bmAlarmIOC    Alarm server                                      xf06bm-inst-ioc1
+ xs3-8ch           :silver:`deprecated XSpress3 server, do not run`  :green:`xf06bm-det-ioc1`
+ xs3-7-1           XSpress3 server for use with 7-element detector   :red:`xf06bm-ioc2`
+ xs3-4-1           XSpress3 server for use with 4-element detector   :green:`xf06bm-det-ioc1`
+================  ================================================= ==========================
 
-IOCs on xf06bm-ioc1
-~~~~~~~~~~~~~~~~~~~
+IOC Notes
+~~~~~~~~~
 
-Additionally, there is one IOC that regularly runs on ``xf06bm-ioc1``.
+:Pilatus100K:
+   The Pilatus100K IOC does a lot of file I/O, so it seemed like a good idea to
+   isolate it from the other IOCs.  And it needs to be on a server that
+   can NFS mount the RAM disk at  ``xf06bm-pilatus100k``.
 
-================  =================================================
-IOC name           purpose
-================  =================================================
- Pilatus100K       Pilatus 100k
-================  =================================================
+   All other IOCs on ``xf06bm-ioc1`` must be in the ``stopped`` state.
 
-This IOC does a lot of file I/O, so it seemed like a good idea to
-isolate it from the other IOCs.
+:MC09:
+   This was moved back to ``xf06bm-ioc2`` when save/restore issues
+   were causing problems on ``xf06bm-inst-ioc1``.  This needs to be revisited.
 
-All other IOCs on ``xf06bm-ioc1`` must be in the ``stopped`` state.
+:xs3-7-1:
+   This should be running on ``xf06bm-det-ioc1``.  Needs investigations.
 
+:logitechF710:
+   This needs to run on a local server with a USB port.
 
 Motor controllers
 -----------------
@@ -286,7 +291,7 @@ If homing from the |bsui| command line fails, your best bet is to find
 the laptop with PEWIN and connect to the motor controller with a USB
 cable.
 
-First, go to xf06bm-ioc2 and stop the reelvant IOC.
+First, go to ``xf06bm-inst-ioc1`` and stop the reelvant IOC.
 
 Fire up PEWIN.  In the PEWIN command console, issue this command:
 ``M1x16=1``, where ``x`` is a number from 1 to 8 and indicates the
@@ -309,14 +314,9 @@ three axes will begin moving.
 geobrick
 ~~~~~~~~
 
-Few or none of the motors on the NSLS-II standard geobricks are
+Few or none of the motors on the older NSLS-II geobricks are
 equipped with home or limit switches.  This includes the motor
-controllers in racks RGC-1 and RGC-2.
+controllers in racks RGC-1 and RGC-2.  MC09 is a newer geobrick and
+controls encoded axes.
 
 Save/restore should remember positions.
-
-The IOCs for the ``xafs_*`` controllers (MC07 and MC08) did not need
-to be restarted, however all the goniometer controllers (MC11, MC12,
-MC13) did.
-
-
