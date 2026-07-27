@@ -22,12 +22,16 @@ Instrumentation Details
 
 This section is a scattershot assortment of details about things at
 the beamline, presented in no special order.  Subsection titles have
-been alphebtized to make them a bit easier to find when reading this
+been alphabetized to make them a bit easier to find when reading this
 page.  This is basically an attempt to capture institutional knowledge
 ... someplace.
 
 All DNS names and IP addresses at 6BM are recorded at
 https://docs.nsls2.bnl.gov/docs/admin/network/beamline_ipaddresses.html#bm-bmm-ip-addresses
+
+See :numref:`Section %s <iocs>` for details about the IOCs running the
+beamline instrumentation.
+
 
 Analog Video Capture
 --------------------
@@ -132,8 +136,8 @@ write to storage.
 Beamline maintenance tools
 --------------------------
 
-(Copied verbatim from wiki page.  Links and other information should
-be verified.  February 2025)
+(The next three subsections were copied verbatim from the BMM wiki
+page.  Links and other information should be verified.  February 2025)
 
 Motor Controllers
 ~~~~~~~~~~~~~~~~~
@@ -141,11 +145,11 @@ Motor Controllers
 On the Windows Laptop, use PEWIN.  PMAC User's Manual
 
 The motor controllers are 10.6.130.81, .82, etc.  You can communicate
-using PEWIN with the laptop on the 10.6.130.X network, with the laptop
-plugged into a DHCP port (it's address will be 10.6.128.213), or using
-a USB cable.  Unplug the network adapter from the Delta Tau before
-plugging in the USB cable. The USB cable is the sort with an A-type
-plug on one end and a B-type on the other end.  
+using PEWIN with the laptop on the 10.6.130.X network, :strike:`with
+the laptop plugged into a DHCP port (it's address will be
+10.6.128.213)`, or using a USB cable.  Unplug the network adapter from
+the Delta Tau before plugging in the USB cable. The USB cable is the
+sort with an A-type plug on one end and a B-type on the other end.
 
 .. _fig_USB:
 .. figure:: _images/infrastructure/USB.png
@@ -203,6 +207,9 @@ The second step is essential or the viewer will be unable to find the cameras on
 + `Prosilica GC technical documentation
   <https://www.alliedvision.com/en/support/technical-documentation/prosilica-gc-documentation.html>`__
 
+.. note:: DSSI should be able to configure Prosilica and Make GigE
+   cameras.  The information above is only needed if, for some reason,
+   DSSI is not or cannot be involved.
 
 
 BNC Cable Map
@@ -811,7 +818,8 @@ Right joystick
    Control the sample XY stage
 
 Left joystick
-   Control the detector Z stage (left/right, up/down do nothing)
+   Control the detector Z stage (left/right, up/down do nothing,
+   inside controller only)
 
 Right trigger buttons
    Rotate the reference wheel
@@ -854,6 +862,8 @@ MC09 patch panel
 ----------------
 
 Photo and explain...
+
+In hutch, patch panel for MC10 is in place but unfinished
 
 
 MCS8 network configuration
@@ -1241,8 +1251,8 @@ XAFS stages on MC08
 ======================================  ==================  ===============================  ======================  ==============
 PV                                      alias               Motor Description                controller              motor number
 ======================================  ==================  ===============================  ======================  ==============
-XF:06BMA-BI{XAFS-Ax:LinY}Mtr            xafs_eigery         area detector y                  MC08 (RGC1)             1
-XF:06BMA-BI{XAFS-Ax:LinX}Mtr            xafs_eigerx         area detector x                  MC08 (RGC1)             2
+XF:06BMA-BI{XAFS-Ax:LinY}Mtr            xafs_ady            area detector y                  MC08 (RGC1)             1
+XF:06BMA-BI{XAFS-Ax:LinX}Mtr            xafs_adx            area detector x                  MC08 (RGC1)             2
 :strike:`XF:06BMA-BI{XAFS-Ax:LinS}Mtr`  :strike:`xafs_det`  :strike:`xafs reference stage`   :strike:`MC08 (RGC1)`   :strike:`3`
 XF:06BMA-BI{XAFS-Ax:LinXS}Mtr           xafs_refy           xafs reference y                 MC08 (RGC1)             4
 XF:06BMA-BI{XAFS-Ax:Pitch}Mtr           xafs_roll           xafs roll stage                  MC08 (RGC1)             5
@@ -1308,6 +1318,8 @@ XF:06BM-ES{SixC-Ax:SAMY}Mtr     6bm:sixc_samy   sample Y                MC12 (RG
 XF:06BM-ES{SixC-Ax:SAMZ}Mtr     6bm:sixc_samz   sample Z                MC12 (RGC2)            6
 XF:06BM-ES{SixC-Ax:Tbl_YD}Mtr   6bm:sixc_tyd    table Y ds              MC12 (RGC2)            7
 XF:06BM-ES{SixC-Ax:Tbl_YUI}Mtr  6bm:sixc_tyui   table Y us ib           MC12 (RGC2)            8
+XF:06BM-ES{SixC-Ax:...}Mtr                      detector ...            MC14 (RGC2)            1
+XF:06BM-ES{SixC-Ax:...}Mtr                      detector ...            MC14 (RGC2)            2
 ==============================  ==============  ====================  ======================  ==============
 
 
@@ -1696,6 +1708,84 @@ You should be good to go.
      ``xf06bm-ioc1``.
 
      That should do it.
+
+
+.. _provision:
+
+Provision a new beamline computer
+---------------------------------
+
+This is a list of notes on how to finish the provisioning of a new
+beamline computer.
+
+Firstly, make sure that ``/nsls2/data`` is a symlink to
+``/nsls2/data3``.  If it is not, ask for help from DSSI.
+
+
+install additional packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++ plasma-desktop (just ... better)
++ redis (essential for operation of |bsui|)
++ most (used as the pager in BMM's |bsui| profile)
++ ag (powerful ack-like grep alternative)
++ fswebcam (used to capture analog pinhole camera)
++ demeter and perl-Graphics-GnuplotIF (something silly, no doubt)
++ slack (communications)
++ ark (compression, useful in file manager)
+
+
+To install these, do:
+
+.. code-block:: sh
+
+   dzdo dnf install redis most ag fswebcam demeter perl-Graphics-GnuplotIF slack ark
+   dzdo dnf install --skip-broken --nobest @kde-desktop
+
+The second command installs the KDE metapackage, skipping missing
+packages. 
+
+To finish installing ``sddm``, do 
+
+.. code-block:: sh
+
+   dzdo systemctl stop gdm
+   dzdo systemctl start sddm
+
+Desktop wallpaper
+~~~~~~~~~~~~~~~~~
+
+This may not be provisioned correctly out of the box.  Find the
+beamline wallpapers in ``/usr/share/nsls2/wallpapers/beamlines``. 
+
+Right click on the desktop and select "Configure Desktop and
+Wallpaper".  Click on "Add Image" and navigate to the folder above.
+
+Things to install from git
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++ BMM stuff: ``git clone git@github.com:NSLS-II-BMM/BMM-beamline-configuration.git``
+  + then, ``cd ~/bin`` and ``ln -s ~/git/BMM-beamline-configuration/tools/run-cadashboard``
++ BMM user manual: ``git clone git@github.com:NSLS2/bmm-beamline-manual.git``
++ BMM standards: ``git clone git@github.com:NSLS2/bmm-standards.git``
++ Switch visualization: ``git clone git@github.com:NSLS-II-BMM/switch-pretty-printer.git``
+
+Also do ``cd ~/bin`` and ``ln -s ~/.ipython/profile_collection/startup/consumer/run-consumer``
+
+Workspace folders
+~~~~~~~~~~~~~~~~~
+
+Make the local data collection folders.  The
+:numref:`BMMuser.begin_experiment() command (Section %s) <start_end>`
+will make symlinks under those folders to the correct place on central
+storage.
+
+.. code-block:: text
+
+   mkdir ~/Workspace
+   mkdir ~/Workspace/Visitors
+   mkdir ~/Workspace/Staff
+
 
 
 .. _rack_cabinets:

@@ -22,7 +22,7 @@ an equals sign and each line contains a single keyword/value pair.
 
 This file captures the set of metadata that the user supplies to
 specify the details of the step scan, the basic configuration of the
-beamline, and some details about the sample preparation.  Most of this
+beamline, and some details about the sample preparation.  This
 metadata is captured in the beamline database and written to the
 header of the output data files.
 
@@ -447,8 +447,8 @@ It does the following chores:
 #. If using the Xspress3 to measure fluorescence with the Si-drift
    detector, an XRF spectrum will be recorded at that energy.
 
-#. Generates a plotting subscription appropriate to the value of
-   ``mode`` in the INI file
+#. Triggers a plot appropriate to the value of ``mode`` in the INI
+   file
 
 #. Enables a :numref:`set of suspenders (Section %s) <interrupt>`
    which will suspend the current XAFS scan in the event of a beam
@@ -576,19 +576,10 @@ BlueSky
 Revisit an XAFS scan
 --------------------
 
-.. admonition:: This is no longer correct.
+.. admonition:: Update needed
 
-   Need to document cammand using ``kafka_message()``
+   Need to document file regeneration using ``kafka_message()``
 
-Grab a database entry and write it to an XDI file::
-
-  db2xdi('/path/to/data/file', '<id>')
-
-The first argument is the name of the output data file.  The second
-argument is either the scan's unique ID |nd| something like
-``f6619ed7-a8e5-41c2-a499-f793b0fcacec`` |nd| or the scan's transient
-id number.  Both the unique and transient ids can be found in
-:numref:`the dossier (Section %s) <dossier>`.
 
 .. _macro:
 
@@ -721,7 +712,7 @@ Assuming your macro file is stored in your data folder under the name
 ``macro.py``, you can load or reload the macro into the running
 BlueSky session::
 
-  %run -i BMMuser.data+'macro.py'
+  %run -i BMMuser.workspace+'macro.py'
 
 This creates (or overwrites) a new kind of plan called
 ``sample_sequence()`` (at line 1, you ``def``\ -ine a function of that
@@ -1201,6 +1192,7 @@ table below for the available elements.
 + For Th L\ :sub:`3`: Bi\ :sub:`1` will be used (outer 22)
 + For U L\ :sub:`3`: Y K will be used (outer 24)
 + For Pu L\ :sub:`3`: Zr K will be used (outer 16)
++ There is a way to use user-supplied Th, U, or Tc samples as the reference.  Ask Bruce.
 + Bromophenol blue: |Brblue|
 
 Four elements are missing: Ba, W, & Os, and Ir.

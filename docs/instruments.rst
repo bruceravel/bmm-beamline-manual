@@ -24,6 +24,10 @@ available for various kinds of routine and *in situ* experiments.
 If you have questions about any of these tools or wish to pursue other
 experimental options, contact the beamline staff.
 
+See :numref:`Section %s <iocs>` for details about the IOCs running the
+beamline instrumentation.
+
+
 Fluorescence detectors
 ----------------------
 
@@ -82,20 +86,21 @@ fully retract the stage, do
 
    RE(mv(xafs_detx, 205))
 
-The ``xafs_dety`` stage is normally at position 0.  Position 0 is
+The ``xafs_dety`` stage is normally at position 5.  Position 5 is
 chosen to have the beam at the height of the center element of the
 detector.  When using the :numref:`glancing angle stage (Section %s)
 <glancing-angle-stage>` in the parallel orientation, move ``xafs_dety``
-to position 20.
+to position 23.
 
 .. code:: python
 
-   RE(mv(xafs_dety, 20))
+   RE(mv(xafs_dety, 23))
 
 The ``xafs_detz`` stage moves the detector upstream or downstream
 according to the details of the sample mount.  It is usually good
-enough to align this by eye.  A more careful alignment can be made
-with a :numref:`linescan (Section %s) <linescan>`:
+enough to align this by eye, which can be done using the left joystick
+on the game controller in the hutch.  A more careful alignment can be
+made with a :numref:`linescan (Section %s) <linescan>`:
 
 .. code:: python
 

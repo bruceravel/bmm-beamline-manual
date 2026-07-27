@@ -683,6 +683,8 @@ Future developments
    + Chemistry experiments using the gas cart, including its mass flow
      controllers, valves, temperature controller, and mass spectrometer.
    + Anton-Parr
+   + Automation of linear/pitch alignment for any pair of motors used
+     for a glancing angle experiment
 
 
 .. caution:: Spreadsheets with version number earlier than 13 **will

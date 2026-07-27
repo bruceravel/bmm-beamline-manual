@@ -84,7 +84,7 @@ The Short Version
    #. Navigate to ``/nsls2/data/bmm/proposals/``, then to the cycle
       folder corresponding to the date of your experiment, then to the
       folder with your proposal number.  So, something like 
-      ``/nsls2/data/bmm/proposals/2024-2/pass-333333``.
+      ``/nsls2/data/bmm/proposals/2026-2/pass-333333``.
    #. Transfer your data to your local computer.
 
 If you preserve the folder structure from the remote host, the
@@ -94,7 +94,7 @@ expected.
 The ``assets`` folder contains raw image and HDF5 from your
 experiment.  Those files will have database-friendly but
 user-unfriendly names.  The HDF5 files are rather large and will take
-some time to download.  The can skip downloading the ``assets`` folder
+some time to download.  You can skip downloading the ``assets`` folder
 if you do not plan on using the HDF5 files directly.
 
 
@@ -240,9 +240,9 @@ GCP running, point your web browser at http://globus.nsls2.bnl.gov/.
 
 In the remote panel on the left side of the page, navigate to your
 proposal directory, which will be something like
-``/nsls2/data/bmm/proposals/2024-3/pass-123456``, where you would
-replace ``2024-3`` with the operations cycle of your visit to BMM and
-replace ``123456`` with the proposal number of your experiment.
+``/nsls2/data/bmm/proposals/2026-2/pass-333333``, where you would
+replace ``2026-2`` with the operations cycle of your visit to BMM and
+replace ``333333`` with the proposal number of your experiment.
 
 In the local panel on the right side of the page, navigate to the
 location to which you want to download your data.
@@ -267,7 +267,7 @@ authentication.
 
 To look at your data while at the beamline, do the following
 
-+ Open a terminal window.  Normally a terminal window with a white
++ Open a terminal window.  Sometimes a terminal window with a white
   background is open on screen and intended for this purpose.
   |bsui| is typically run from a window with a black background, so
   the white background is meant as a visual cue indicating that it is
@@ -280,7 +280,7 @@ To look at your data while at the beamline, do the following
      su - <username>
 
   replacing ``<username>`` with your actual user name. Enter your
-  password and respond to DUO push.
+  password and respond to the DUO push.
 
 + ``cd`` to ``/nsls2/data3/bmm/proposals/2024-2/pass-123456``, replacing
   ``2024-2`` with the cycle of your visit and ``123456`` with your
@@ -378,11 +378,11 @@ issuing the command:
 
 .. code-block:: bash
 
-   cd /nsls2/data/bmm/proposal/2026-1/123456
+   cd /nsls2/data/bmm/proposal/2026-2/333333
 
-Substituting the ``2026-1/123456`` with the location of your
-experiment's proposal folder.  You can then open Athena, prefereable
-with this command
+Substituting the ``2026-2/333333`` with the location of your
+experiment's proposal folder.  You can then open Athena.  This command
+hides on-screen warnings which are usually pointless.
 
 .. code-block:: bash
 
@@ -612,7 +612,3 @@ Xspress3 at each point in an XAFS scan are written to the
    The Ophyd objects interacting with these instruments are often
    configured to use the dated folders automatically.
 
-
-.. note::
-
-   The data folders for all beamlines work as described here.
