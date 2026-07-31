@@ -1104,3 +1104,115 @@ Here is an example of moving a motor by 10 mm at BMM:
 The ``pos`` argument to the ``item_add`` method takes either
 ``"front"`` or ``"back"`` and refers to the position in the queue to
 which the plan will be pushed.
+
+
+Using Zoom
+----------
+
+Zoom is available at the beamline and is often used by Bruce to do
+beamline support from home.  Usually, Zoom is started remotely and all
+the visitor needs to do is start talking.
+
+Sometimes the audio settings need to be adjusted or the microphone
+needs to be manually reset.  Because Bruce is not present when doing
+remote support, he cannot know if the speaker is not working.  Neither
+can he do a manual adjustment of the microphone.
+
+In this section, *explicit and laborious* instructions are given for
+how to reset audio at workstation 3, the main computer used for XAS
+experiments.
+
+To start, here are photos of the hardware.  There is a speaker bar.
+It is located just below the monitors and shown on the left of
+:numref:`Figure %s <fig-zoom_hardware>`.  It is the object circled in
+red.  On the right hand side of the speaker bar is the volume knob.
+It is indicated by the green arrow.  Turning that knob adjusts the
+sound volume.
+
+
+.. subfigure::  AB
+   :layout-sm: AB
+   :gap: 8px
+   :subcaptions: above
+   :name: fig-zoom_hardware
+   :class-grid: outline
+
+   .. image:: _images/zoom/zoom_speaker.jpg
+
+   .. image:: _images/zoom/zoom_mike.jpg
+
+   (Left) The speaker at workstation 3.  Note the volume knob,
+   indicated by the green arrow, on the right.  You may need to turn
+   the volume on or up.  (Right) The microphone at workstation 3.  The
+   USB cable on the rear of the microphone is marked in red.
+
+
+The microphone is shown on the right of :numref:`Figure %s
+<fig-zoom_hardware>`.  The USB cable that connects the speaker to the
+computer is located on the rear end of the speaker casing and is
+indicated by the red circle.
+
+When everything is working correctly, all you need to do is look into
+the camera (perched on top of one of the monitors) and speak into the
+microphone.  Please remember that if you turn your head away from the
+microphone, it may not pick up your voice.
+
+
+You can pull up the audio settings dialog in Zoom by first clicking on
+the upwards-pointing arrow next to the "Mute" button on the main Zoom
+screen, as shown on the left of :numref:`Figure %s
+<fig-zoom_audiodialog>`.  The audio setting dialog, shown on the right
+of :numref:`Figure %s <fig-zoom_audiodialog>`, will appear.
+
+.. subfigure::  AB
+   :layout-sm: AB
+   :gap: 8px
+   :subcaptions: above
+   :name: fig-zoom_audiodialog
+   :class-grid: outline
+
+   .. image:: _images/zoom/zoom_audio.png
+
+   .. image:: _images/zoom/zoom_audio_dialog.png
+
+   (Left) Accessing the audio setting dialog in Zoom.  (Right) The
+   audio settings dialog.  The microphone settings are indicated in cyan.
+
+
+When everything is working correctly, the speaker selection will say
+"Family 17h", as shown on the right of :numref:`Figure %s
+<fig-zoom_audiodialog>`, and the microphone selection will be "Blue
+Microphones Analog Stereo".  
+
+
+Troubleshooting the speaker
+   If you click the :key:`Test speaker` button, you should hear a tune
+   coming from the speaker bar under the monitors (as shown on the
+   left of :numref:`Figure %s <fig-zoom_hardware>`).  If you hear no
+   sound or if the sound is feint, turn the volume knob on the right
+   hand side of the speaker bar.  If you still do not hear the
+   speaker, check the menu of speaker options to make sure that the
+   "Family 17h" option is selected.
+
+Troubleshooting the microphone
+   If the microphone appears not to be working or if the selection is
+   anything other than "Blue Microphones Analog Stereo", select "Blue
+   Microphones Analog Stereo" from the menu.
+
+   If the microphone still is not working, unplug the USB cable from
+   the back of the microphone, wait a couple seconds, then plug it
+   back in.  The selection in the audio dialog should change to "Blue
+   Microphones Analog Stereo" on its own, but you may need to manually
+   select it from the menu.
+
+
+.. caution::
+
+   **DO NOT** try to unplug the end of that USB cable that plugs into
+   the computer.  You **DO NOT** have permission to go rooting through
+   the cables on the back of the computer.
+
+These instructions fix the most common audio problems.  If things
+still aren't working, then Bruce will have to take a deeper dive the
+next time he is physically present at the beamline.  :numref:`Figure
+%s <fig-zoom_hardware>`.
