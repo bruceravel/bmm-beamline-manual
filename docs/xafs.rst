@@ -351,8 +351,8 @@ sequence.
 
 .. _usbsafe:
 
-Safe filenames for USB sticks
------------------------------
+USB-Safe Filenames
+------------------
 
 `These characters are problematic for filenames
 <https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words>`_:
@@ -1091,6 +1091,130 @@ where
 ``xmax``
    Specify the maximum energy plotted on the x-axis in units of energy
    above the measured fluorescence line energy
+
+
+.. _hdf5_files:
+
+Finding HDF5 files
+------------------
+
+When measuring in fluorescence using the silicon drift detector and
+the XSpress3 readout system, along with integrated intensities in the
+the relevant ROI from each channel of the detector, a full XRF
+spectrum is saved at every point of the XAFS scan.
+
+From time to time, it is useful to consult the stack of XRF spectra.
+They are stored in an HDF5 file located in a specific location in the
+proposal folder.
+
+Each proposal folder has an assets folder.  An example is shown in
+:numref:`Figure %s <fig-assets_folder>`.  This and all subfolders have
+special permissions.  Devices at the beamline are permitted to write
+to the ``assets`` folders, but people are not.  Anyone on the proposal
+is able to *read* files in the ``assets``, but not delete them or
+create new file.
+
+.. _fig-assets_folder:
+.. figure:: _images/datasec/assets_folder.png
+   :target: _images/assets_folder.png
+   :width: 70%
+   :align: center
+
+   Each proposal folder has an assets folder.  
+
+
+Inside the ``assets`` folder are folders for each device at the
+beamline that generates data assets.  For the silicon drift detector,
+the folder ``xspress3-1`` is the destination of the HDF5 files its IOC
+writes.  This folder |nd| along with several others for instruments at
+BMM |nd| are shown in :numref:`Figure %s <fig-device_folders>`.
+
+.. _fig-device_folders:
+.. figure:: _images/datasec/device_folders.png
+   :target: _images/device_folders.png
+   :width: 70%
+   :align: center
+
+   The ``xspress3-1`` folder is the destination ofr HDF5 foiles
+   containing the fluorescence spectra.
+
+The many HDF5 files written during the course of an experiment are
+saved in dated folders.  that is, an HDF5 file generated on a
+particular date will be in a folder of the form ``YYYY/MM/DD``, as
+shown in :numref:`Figure %s <fig-dated_folders>`.
+
+
+.. _fig-dated_folders:
+.. figure:: _images/datasec/dated_folders.png
+   :target: _images/dated_folders.png
+   :width: 70%
+   :align: center
+
+   Dated folders for storing the HDF5 files.
+
+The HDF5 files themselves are not named in the most convenient manner.
+The file names are long UUID strings, as shown in 
+:numref:`Figure %s <fig-dated_folders>`.
+
+.. _fig-hdf5_files:
+.. figure:: _images/datasec/hdf5_files.png
+   :target: _images/hdf5_files.png
+   :width: 70%
+   :align: center
+
+   HDF5 files with awkward filenames.
+
+So, how do you associate the HDF5 file with the XAFS measurement?
+There are two solutions.  If you are a :numref:`Tiled user (see
+Section %s) <tiled_data_access>`, you will find the HDF5 file
+identified in the start document of the record's metadata.
+
+More likely, you are using one of the :numref:`XDI files (see Section
+%s) <xdiexample>` written after each XAFS scan.  
+
+.. _fig-file_header:
+.. figure:: _images/datasec/file_header.png
+   :target: _images/file_header.png
+   :width: 70%
+   :align: center
+
+   The HDF5 file associated with the XAFS scan is identified in the header.
+
+
+.. note::
+
+   Other detectors, including the Mythen, the Eiger, and the Pilatus
+   also write HDF5 files to the appropriate locations in the
+   ``assets`` folder.  Cameras, such as the Axis webcams and the Mako
+   network cameras write jpg files to their locations under
+   ``assets``.
+
+
+HDF5 files do require special software to be read:
+
++ programming packages like `python's h5py
+  <https://docs.h5py.org/en/latest/quick.html>`__ or `Matlab's built-in
+  HDF5 tooling
+  <https://www.mathworks.com/help/matlab/import_export/import-hdf5-files.html>`__
+
++ desktop tools like `pyXRF
+  <https://nsls-ii.github.io/PyXRF/index.html>`__ or `myHDF5
+  <https://myhdf5.hdfgroup.org/>`__ 
+
+Once read, you will find the data in the HDF5 file is stored as an
+array of dimensions N x 8 x 4092.
+
++ N is the number of data points in the XAS spectrum.  There is one
+  XRF spectrum for each data point in the XAS spectrum.  So, an XAS
+  measurement of 346 energy points will have N=346 in the HDF5 file.
+
+* 8 is the number of channels on the readout system.  BMM uses a
+  7-element detector, so only the first seven of the 8 channels will
+  have meaningful data.
+
+* 4092 is the number of energy bins in the XRF histogram.  Each energy
+  bin is 10 eV wide.
+
 
 .. _reference-wheel:
 

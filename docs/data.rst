@@ -399,6 +399,7 @@ hides on-screen warnings which are usually pointless.
    data.
 
 
+.. _tiled_data_access:
 
 Accessing data via Tiled
 ------------------------
