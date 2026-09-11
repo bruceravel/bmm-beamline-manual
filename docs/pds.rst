@@ -414,8 +414,16 @@ facilitating any actions a user should ever need.
    intensity.  Rather, they refer to the direction of motion of the
    motor which adjusts the second crystal pitch.  When you move to
    higher energy, you usually need to tune in ``td()`` direction.
-   When you move to a lower energy, you usually need to tune in the
+   When you move to lower energy, you usually need to tune in the
    ``tu()`` direction.  Obviously.....
+
+**Piezo adjustment of second crystal pitch**
+   You can adjust the pitch of the second crystal using a piezo motor::
+
+     RE(mvr(dcm.finepitch, 0.2))
+
+   This can be used for feedback control of the second crystal pitch.
+
 
 **Fixed-exit and pseudo-channelcut modes**
    The mono can be run in either fixed-exit or pseudo-channelcut
